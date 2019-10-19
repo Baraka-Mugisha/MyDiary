@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="an online journal where users can pen down their thoughts and feelings, MyDiary">
+  <meta name="author" content="BARAKA UWIMANA Jean Pierre">
+  <title>Diary - Settings</title>
+  <link rel="shortcut icon" type="image/png" href="../images/icons8-journal-100.png" />
+  <link rel="stylesheet" type="text/css" media="screen and (min-width: 800px)" href="../css/widescreen.css">
+
+  <link rel="stylesheet" type="text/css" media="screen and (max-width: 800px)" href="../css/smallscreen.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav-bar">
+      <div class="nav-index">
+
+        <span class="logo">
+          <a href="../index.html">MyDiary</a>
+        </span>
+      </div>
+      <div class="nav-list">
+        <ul>
+          <li>
+            <a href="./createEntry.html">Create Entry</a>
+          </li>
+          <li>
+            <a href="./viewEntries.html">View Entries</a>
+          </li>
+
+          <li>
+            <a href="./settings.html">Settings</a>
+          </li>
+          <li>
+            <a href="./signin.html">Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <div class="settings-container">
+        <div class="settings-content">
+          <div class="edit-profile">
+            <div class="edit-profile-picture profile">
+              <img src="../images/profile.jpg" alt="Profile Picture">
+              <input id="hidden-picture-upload" type="file" accept="image/*">
+              <label id="change-picture" for="hidden-picture-upload">Change Picture</label>
+            </div>
+            <div class="edit-user-credentials">
+              <div>
+                <label>User Name</label>
+                <input value="Baraka Mugisha">
+              </div>
+              <div>
+                <label>Email</label>
+                <input value="email@gmail.com">
+              </div>
+              <div>
+                <label>Phone Number</label>
+                <input placeholder="+250-">
+              </div>
+              <div>
+                <a href="">
+                  <label>Change Password</label>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="number-of-entries">
+            <label>Since registration, you have made : </label>
+            <a href="../html/viewEntries.html">
+              <label id="entries-made">15 entries</label>
+            </a>
+          </div>
+          <div class="notification-settings">
+            <div class="notifications-title">
+              <label>Notification Reminder</label>
+
+            </div>
+            <div class="notifications-through">
+              <div>
+                <label>Send notifications to:</label>
+              </div>
+              <div>
+                <label>Desktop</label>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div>
+                <label>E-mail</label>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div>
+                <label>Phone</label>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+            <div class="notifications-frequency">
+              <div>
+                <div>
+                  <label>Every</label>
+                  <select>
+                    <option>1 hour</option>
+                    <option>2 hours</option>
+                    <option>3 hours</option>
+                    <option>4 hours</option>
+                    <option>5 hours</option>
+                    <option>day</option>
+                    <option>week</option>
+                  </select>
+                </div>
+                <div>
+                  <label>At</label>
+                  <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                  </select>
+                  <select>
+                    <option>AM</option>
+                    <option>PM</option>
+                  </select>
+                </div>
+                <div>
+                  <label>Activate Notifications</label>
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notifications-message">
+            <label>We will help you remember to write in your journal by sending you a reminder</label>
+          </div>
+          <div class="save-settings">
+            <a href="">
+              <label>Save Settings</label>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer">
+      <span>© 2019 My Diary -
+        <a href="">Privacy Statement - </a>Terms -
+        <a href="">Contact Us - </a>
+        <a href="">About Us </a>
+      </span>
+    </div>
+    <script type="text/javascript">
+      let profile = document.querySelector('#hidden-picture-upload');
+    </script>
+</body>
+
+</html>
