@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="an online journal where users can pen down their thoughts and feelings, MyDiary">
+  <meta name="author" content="BARAKA UWIMANA Jean Pierre">
+  <title>Diary - Modify Entry</title>
+  <link rel="shortcut icon" type="image/png" href="../images/icons8-journal-100.png" />
+  <link rel="stylesheet" type="text/css" media="screen and (min-width: 800px)" href="../css/widescreen.css">
+
+  <link rel="stylesheet" type="text/css" media="screen and (max-width: 800px)" href="../css/smallscreen.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav-bar">
+      <div class="nav-index">
+
+        <span class="logo">
+          <a href="../index.html">MyDiary</a>
+        </span>
+      </div>
+      <div class="nav-list">
+        <ul>
+          <li>
+            <a href="./createEntry.html">Create Entry</a>
+          </li>
+          <li>
+            <a href="./viewEntries.html">View Entries</a>
+          </li>
+
+          <li>
+            <a href="./settings.html">Settings</a>
+          </li>
+          <li>
+            <a href="./signin.html">Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <div class="edit-entry-container">
+        <div class="edit-entry-content">
+          <div class="profile-save">
+            <div class="profile">
+              <img src="../images/profile.jpg">
+            </div>
+            <div class="last-updated">
+              <span id="now-date">Last Updated on Mon Oct 07 2019</span>
+            </div>
+            <div class="save-entry">
+              <img title="share your entry" id="share-icon" src="../images/icons8-share-26.png">
+               <a href="../html/viewEntries.html"><img title="Discard Changes" id="discard-icon" src="../images/icons8-cancel-26.png"></a>
+               <a href="../html/viewEntries.html"><img title="Delete Entry" id="delete-icon" src="../images/icons8-trash-26.png"></a>
+              <a href="../html/viewEntries.html"><img title="Save Entry" id="save-icon" src="../images/icons8-save-26.png"></a>
+            </div>
+          </div>
+          <div class="edit-options">
+            <select class="font-families">
+              <option id="monospace">Monospace</option>
+              <option id="sans-serif">Sans-serif</option>
+              <option id="nazalization">Nazalization</option>
+              <option id="times-new-roman">Times New Roman</option>
+              <option id="induction">Induction</option>
+              <option id="arial">Arial</option>
+              <option id="cracked-johnnie">Cracked Johnnie</option>
+              <option id="calibri">Calibri</option>
+              <option id="georgia">Georgia</option>
+            </select>
+            <select class="font-sizes">
+              <option>10</option>
+              <option>12</option>
+              <option>14</option>
+              <option>16</option>
+              <option>18</option>
+              <option>20</option>
+              <option>22</option>
+              <option>24</option>
+              <option>26</option>
+              <option>28</option>
+              <option>30</option>
+            </select>
+            <img title="bullets" src="../images/icons8-list-26.png">
+            <span class="bold" title="bold">
+              <strong>Bold</strong>
+            </span>
+            <span class="italics" title="italics">
+              <em>Italicize</em>
+            </span>
+            <span class="Underline" title="Underline">Underline</span>
+            <span class="Highlight" title="Highlight">Highlight</span>
+            <span class="Strikethrough" title="Strikethrough">Strikethrough</span>          
+              
+            <!-- <img class="load-picture" title="picture" src="../images/icons8-picture-30.png"> -->
+          
+          </div>
+          <div class="edit-title">
+            <input id="edit-title" type="text" placeholder="Title..." value="My Default Diary Title">
+          </div>
+          <div class="entry-description">
+            <textarea name="edit-description" placeholder="Write down your thoughts" cols="38" rows="15" maxlength="1000">
+Lorem ipsum dolor sit amet, onsectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
+ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto o dio dignissim qui blandit praesent luptatum zzril delenit
+augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+id quod mazim placerat facer possim assum. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
+velit esse molestie consequat, vel il lum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis
+eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Nam liber tempor cum soluta nobis
+eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer
+adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim
+veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel
+eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at
+vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla
+facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim
+assum. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim
+assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+              
+            </textarea>
+          </div>
+          <!-- <div class="description" contenteditable="true" aria-colcount="12" aria-rowcount="10">Write down your thoughts...</div> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer">
+    <span>© 2019 My Diary -
+      <a href="">Privacy Statement - </a>Terms -
+      <a href="">Contact Us - </a>
+      <a href="">About Us </a>
+    </span>
+  </div>
+  <script type="text/javascript">
+
+  </script>
+</body>
+
+</html>
