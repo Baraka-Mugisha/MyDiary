@@ -197,4 +197,76 @@ describe('User sign up test: case 2', () => {
       });
     done();
   });
-})
+});
+// Logging in
+describe('User Login test', () => {
+  beforeEach('Create an employee', (done) => {
+    chai.request(app)
+      .post('/auth/signup')
+      .send(mockData.SignUp_complete2)
+      .end((error) => {
+        done();
+      });
+  });
+  it('it should login a user', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(mockData.Login_complete)
+      .end((_err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('token');
+        res.body.data.should.have.property('id');
+        res.body.data.should.have.property('firstName').eql('Ben');
+        res.body.data.should.have.property('lastName').eql('Gisa');
+        res.body.data.should.have.property('email').eql('bengisa@gmail.com');
+        res.body.should.have.property('message').eql('User found');
+        done();
+      });
+  });
+  it('it should not login a user with no email', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(mockData.Login_noEmail)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('email is required');
+        done();
+      });
+  });
+  it('it should not login a user with no password', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(mockData.Login_noPassword)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('password is required');
+        done();
+      });
+  });
+  it('it should not login a user with wrong password', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(mockData.Login_wrongPswd)
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('enter the correct password');
+        done();
+      });
+  });
+  it('it should not login a user who does not have account', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(mockData.Login_wrongEmail)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('error').eql('There is no such user with that email');
+        done();
+      });
+  });
+});
