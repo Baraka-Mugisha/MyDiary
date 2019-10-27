@@ -1,5 +1,5 @@
 import express from 'express';
-
+import authRoutes from './routes/authenticationRoutes';
 import dotenv from 'dotenv';
 
 import bodyParser from 'body-parser';
@@ -14,6 +14,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
   res.status(200).send({ message: "Welcome to MyDiary" })
 });
+
+app.use('/auth', authRoutes);
 
 app.listen(port, console.log('the app is listening on port', port));
 
