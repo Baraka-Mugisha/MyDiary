@@ -26,9 +26,9 @@
       <div class="nav-list">
         <ul>
           <li>
-            <a href="./viewEntries.html">View Entries</a>
+            <a href="./viewEntries.html">Dashboard</a>
           </li>
-          
+
           <li>
             <a href="./settings.html">Settings</a>
           </li>
@@ -45,20 +45,26 @@
             <div class="profile">
               <img src="../images/profile.jpg">
             </div>
-            <div class="last-updated">
-              <span id="now-date"></span>
-            </div>
-            <div class="save-entry">
-              
-              <a href="../html/viewEntries.html"><img title="Cancel" id="discard-icon" src="../images/icons8-cancel-26.png"></a>
-              
-              <a href="../html/viewEntries.html"><img title="Save entry" id="save-icon" src="../images/icons8-save-26.png"></a>
+            <div class="right">
+              <div class="save-entry">
+
+                <a href="../html/viewEntries.html">
+                  <img title="Cancel" id="discard-icon" src="../images/icons8-cancel-26.png">
+                </a>
+
+                <a href="../html/viewEntries.html">
+                  <img title="Save entry" id="save-icon" src="../images/icons8-save-26.png">
+                </a>
+              </div>
+              <div class="last-updated">
+                <span id="now-date"></span>
+              </div>
             </div>
           </div>
           <div class="edit-options">
             <select class="font-families">
               <option id="monospace">Monospace</option>
-              <option id="sans-serif">Sans-serif</option>            
+              <option id="sans-serif">Sans-serif</option>
               <option id="nazalization">Nazalization</option>
               <option id="times-new-roman">Times New Roman</option>
               <option id="induction">Induction</option>
@@ -81,22 +87,24 @@
               <option>30</option>
             </select>
             <img title="bullets" src="../images/icons8-list-26.png">
-            <span class="bold" title="bold"><strong>Bold</strong></span>
-            <span class="italics" title="italics"><em>Italicize</em></span>
+            <span class="bold" title="bold">
+              <strong>Bold</strong>
+            </span>
+            <span class="italics" title="italics">
+              <em>Italicize</em>
+            </span>
             <span class="Underline" title="Underline">Underline</span>
             <span class="Highlight" title="Highlight">Highlight</span>
-            <span class="Strikethrough" title="Strikethrough">Strikethrough</span>         
-                        
-            <!-- <img class="load-picture" title="picture" src="../images/icons8-picture-30.png"> -->
-            
+            <span class="Strikethrough" title="Strikethrough">Strikethrough</span>
+
           </div>
           <div class="edit-title">
             <input id="edit-title" type="text" placeholder="Title...">
           </div>
           <div class="entry-description">
-            <textarea name="edit-description" placeholder="Pen down your thoughts and feelings" cols="38" rows="15" maxlength="1000"></textarea>
+            <textarea name="edit-description" placeholder="Pen down your thoughts and feelings" cols="38" rows="15" maxlength="1500"
+              spellcheck="false"></textarea>
           </div>
-          <!-- <div class="description" contenteditable="true" aria-colcount="12" aria-rowcount="10">Write down your thoughts...</div> -->
         </div>
       </div>
     </div>
@@ -109,11 +117,7 @@
       <a href="">About Us </a>
     </span>
   </div>
-  <script type="text/javascript">
-    let now_date = document.querySelector('#now-date');
-    let newDate = new Date();
-    now_date.textContent = newDate.toString().split('G')[0];
-
+  <script type="text/javascript" src="../js/scripts.js">S
   </script>
 </body>
 

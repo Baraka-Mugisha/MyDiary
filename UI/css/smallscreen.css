@@ -29,7 +29,6 @@ color: rgb(0, 0, 0);
 }
 .nav-bar{
   background-color: var(--diaryColor);
-  /* background-image: var(--diaryColorbar); */
   padding: 5px 10px;
   top: 0;
   z-index: 1;
@@ -57,11 +56,6 @@ color: rgb(0, 0, 0);
   border-left: 2px solid rgb(255, 255, 255);
   border-right: 2px solid rgb(255, 255, 255);
   border-radius: 5px
-  
-
-}
-.nav-list{
-float:right;
 }
 
 .footer {
@@ -117,9 +111,8 @@ margin: auto;
 .sign-in {
 border: 1px solid rgba(55, 106, 165, 0.145);
 background-color: rgba(231, 231, 240, 0.945);
-width: auto;
-margin: 10vh;
-padding: 24px;
+margin: auto;
+padding: 20px;
 font-size: 20px;
 display: inline-block;
 box-shadow: 3px 3px 10px rgba(34, 34, 34, 0.337);
@@ -203,13 +196,6 @@ text-decoration: none;
 */
 
 .edit-entry-container, .settings-container, .entries-container{
-  width: 60%;
-  margin: auto;
-  height: fit-content;
-  border-radius: 10px
-}
-.edit-entry-container{
-  width: 65%;
   margin: auto;
   height: fit-content;
   border-radius: 10px
@@ -224,7 +210,7 @@ text-decoration: none;
   background-repeat: round;
   object-fit: fill;
   min-height: 100vh;
-  padding: 10px
+  padding: 5px
 }
 
 .entry-description textarea, .description {
@@ -258,10 +244,6 @@ text-decoration: none;
   display: inline-block;
   vertical-align: middle;
 }
-/* .profile-save{
-  margin-bottom: 10px
-} */
-
 .edit-options img{
   width: 20px;
   padding: 3px 5px;
@@ -274,11 +256,10 @@ text-decoration: none;
 }
 
 .edit-options {  
-  border: 2px solid rgb(170, 170, 170);
-  font-size: 18px;
-  text-align: center;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
+ font-size: 1em;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
 }
 .edit-options span:hover, .edit-options img:hover{
   background-color: rgb(199, 199, 199);
@@ -328,11 +309,14 @@ border-radius: 10px
   font-weight: 600;
   z-index: auto
 }
-.profile-save .right{
-  float: right
+
+.profile-save .right{ 
+  float: right;
+  max-width: 80%
 }
+
 .profile{
-  width: 10%;
+  max-width: 20%;
 }
 
 .profile img{
@@ -341,22 +325,20 @@ border-radius: 10px
   border: 3px solid rgb(194, 194, 194)
 }
 
-  
-/* 
--*------     THIS IS FOR THE SPECIFIC ENTRY   -----------
+
+/*------     THIS IS FOR THE SPECIFIC ENTRY   -----------
 --------------------------------------------------------- 
 */
 
 .entry-title{
-      font-weight: 700;
-    padding: 10px;
-    font-size: 30px;
+      font-weight: 600;
+    padding: 5px;
+    font-size: 1.5em;
     width: 97%;
     font-family: monospace;
 }
 p{
     margin-block-end: 0;
-    margin-block-start: 0;
     white-space: pre-line;
 }
 .entry-title p{
@@ -413,7 +395,9 @@ opacity: 0.8;
 text-align: center;
   display: block;
 }
-
+.save-settings{
+    padding: 0 20px;
+}
 .edit-profile{
   margin: auto;
   display: inline-flex;
@@ -641,16 +625,12 @@ color: var(--diaryColor)
 .upper input, .upper select{
   border-radius: 10px;
     border: 1px solid var(--btncolor);
-    background-color: rgba(236, 236, 236, 0.295);
+    background-color: rgba(236, 236, 236, 0.767);
     font-size: 1.3em;
     color: var(--btnncolor, #000);
     padding: 5px 20px;
     margin: 10px;
     width: auto;
-}
-
-.upper div select{
-  float: right
 }
 
 /* 
@@ -660,7 +640,7 @@ color: var(--diaryColor)
 */
 
 .home-container{
-  width: 70%;
+  width: 100%;
   margin: auto;
   height: fit-content;
   border-radius: 10px
@@ -704,10 +684,6 @@ color: var(--diaryColor)
   border-bottom: 5px solid rgba(0, 0, 0, 0.288);
 }
 
-.testimonials-content{
-  display: grid;
-  grid-template-columns: auto auto
-}
 .testimonial img{
   border-radius: 50%;
   width: 40%;
@@ -756,10 +732,10 @@ position: relative;
 
 .contact-content input,
 textarea {
-width: 47%;
-padding:10px;
+min-width: 97%;
+padding:5px;
 margin: 5px 0;
-font-size: 1.4em;
+font-size: 1.2em;
 border-radius: 10px;
 transition: 0.5s;
 background-color: rgba(146, 138, 184, 0.116)

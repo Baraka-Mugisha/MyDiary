@@ -10,7 +10,7 @@
   <title>Diary - User Log In</title>
   <link rel="shortcut icon" type="image/png" href="../images/icons8-journal-100.png" />
   <link rel="stylesheet" type="text/css" media="screen and (min-width: 800px)" href="../css/widescreen.css">
-  <link rel="stylesheet" type="text/css" media="screen and (max-width: 800px)" href="../css/smallscreencss.css">
+  <link rel="stylesheet" type="text/css" media="screen and (max-width: 800px)" href="../css/smallscreen.css">
 </head>
 
 <body>
@@ -36,22 +36,21 @@
     <div class="content">
       <div class="sign-in-container">
         <div class="sign-in-content">
-          
+
           <div class="sign-in">
-            <form class="sign-in-form">
-              <input type="email" placeholder="Enter your Email" required>
+            <form class="sign-in-form" action="../html/viewEntries.html">
+              <input type="email" placeholder="Enter your Email">
               <br/>
-              <input type="password" placeholder="Enter your Password" required>
-              <br><br>
+              <input type="password" placeholder="Enter your Password">
+              <br>
+              <br>
               <a href="" style="text-decoration: none">
                 <p> Forgot Password? </p>
               </a>
               <br>
-              <a href="../../index.html">
-                <button id="sign-in-btn" type="submit">
-                  <a href="./viewEntries.html">Sign In</a>
-                </button>
-              </a>
+              <button id="sign-in-btn" type="submit">
+                Sign In
+              </button>
 
             </form>
             <hr>

@@ -1,0 +1,9 @@
+# Ignore node_modules, nyc_output, .vscode and coverage folders
+node_modules
+.nyc_output
+.vscode
+coverage
+
+# Ignore coveralls.yml and .env to keep them confidential
+.coveralls.yml
+.env
