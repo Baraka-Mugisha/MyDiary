@@ -123,7 +123,21 @@ const mockData = {
   Entry_1: {
     title: 'Just a sign',
     description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
-  }
+  },
+  Entry_titleEmpty: {
+    title: '',
+    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+  },
+  Entry_descriptionEmpty: {
+    title: 'Just a sign',
+    description: ''
+  },
+  Entry_missingTitle: {
+    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+  },
+  Entry_missingDescription: {
+    title: 'Just a sign'
+  },
 };
 
 export default mockData;
