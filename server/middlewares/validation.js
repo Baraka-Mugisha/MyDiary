@@ -20,7 +20,7 @@ export const schema = {
     entries: Joi.object().keys({
         id: Joi.string().regex(/^[0-9 ]*$/).min(1).max(30),
         title: Joi.string().regex(/^[a-zA-Z0-9 ]*$/).min(1).max(30).required(),
-        description: Joi.string().max(1000).required(),
+        description: Joi.string().min(1).max(1000).required(),
         entry_id: Joi.number().min(1).max(10),
     }),
     entryDelete: Joi.object().keys({

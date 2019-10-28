@@ -1,5 +1,7 @@
 import express from 'express';
 import authRoutes from './routes/authenticationRoutes';
+import entriesRoutes from './routes/entriesRoutes';
+
 import dotenv from 'dotenv';
 
 import bodyParser from 'body-parser';
@@ -16,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/entries', entriesRoutes);
 
 app.listen(port, console.log('the app is listening on port', port));
 
