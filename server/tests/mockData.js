@@ -81,6 +81,7 @@ const mockData = {
   },
 
   // Sign In
+
   SignUp_complete2: {
     firstName: 'Ben',
     lastName: 'Gisa',
@@ -108,6 +109,8 @@ const mockData = {
   },
 
   //Entries MockData
+
+
    Entry_SignUp: {
     firstName: 'Baraka',
     lastName: 'Mugisha',
@@ -119,6 +122,18 @@ const mockData = {
     lastName: 'Nyagatare',
     email: 'jimnyagtr@gmail.com',
     password: 'complicatedpassword'
+  },
+  Entry_SignUp3: {
+    firstName: 'James',
+    lastName: 'Nyagatare',
+    email: 'nkundi@gmail.com',
+    password: 'mymydpassword'
+  },
+  Entry_SignUp4: {
+    firstName: 'Nkurunziza',
+    lastName: 'Daniel',
+    email: 'nkuru@gmail.com',
+    password: 'minepassword'
   },
   Entry_1: {
     title: 'Just a sign',

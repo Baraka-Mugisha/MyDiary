@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.post('/', entriesController.createEntry);
 
+router.get('/', entriesController.viewEntries);
+
 export default router;
