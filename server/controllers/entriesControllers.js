@@ -64,6 +64,36 @@ const entryController = {
     }
     return res.status(401).json({ status: 401, message: "You are not authorised for this operation. Sign in first." });
   },
+  modifyEntry(req, res) {
+    const user = database.users.find(user => user.email == tokens.decoded(req, res).email);
+    const id = req.params.entry_id;
+    const title = req.body.title;
+    const description = req.body.description;
+
+    const entry = database.entries.find(entry => entry.id === parseInt(id, 10));
+    if (user) {
+      // validate the user input
+      const result = Joi.validate({ id, title, description }, schema.entries);
+      if (result.error) {
+        return res.status(400).json({ status: 400, message: { error: `${result.error.details[0].message.split('\"').join('')}` } });
+      };
+
+      if (!entry) { return res.status(404).json({ status: 404, error: "the  entry was not found" }) };
+
+      if (entry.user_email === user.email) {
+        const date = new Date();
+        database.entries.find(entry => entry.id === parseInt(id, 10)).description = description;
+        database.entries.find(entry => entry.id === parseInt(id, 10)).title = title;
+        database.entries.find(entry => entry.id === parseInt(id, 10)).createdOn = `${date.getHours()}:${date.getMinutes()}, ${date.toDateString()}`;
+        return res.status(200).json({ status: 200, message: "entry successfully edited", data: { title: title, description: description } });
+      }
+
+      return res.status(401).json({ status: 401, error: "you can not edit another user's entry" });
+    };
+
+    return res.status(401).json({ status: 401, error: "You are not authorised for this operation. Sign in first." });
+  },
+
 };
 
 export default entryController;

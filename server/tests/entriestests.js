@@ -15,6 +15,9 @@ let tokenFive;
 let tokenSix;
 
 // About creating an entry
+// ________________________
+//______________________
+
 describe('Creating an entry', () => {
   it('first sign up a user', (done) => {
     chai.request(app)
@@ -304,4 +307,131 @@ describe('Viewing a specific entry', () => {
         done();
       })
   });
+
+  // Modify entry
+//==================
+//==================
+
+
+})
+
+// Modify entry
+//==================
+//==================
+
+describe('Modify a specific entry', () => {
+  it('User should modify an entry', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .send(mockData.Entry_1)
+      .end((_err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('message').eql('entry successfully edited');
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('title');
+        res.body.data.should.have.property('description');
+        done();
+      });
+  });
+  it('User should not modify entry if not signed up', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .send(mockData.Entry_1)
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('You are not authorised for this operation. Sign in first.');
+        done();
+      });
+  });
+  it('User should not modify an entry with an invalid token', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .send(mockData.Entry_1)
+      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySyeryrteyrteyereryrtoiQ2hyaXN0aWFuIiwibGFzdE5hbWUiOiJLYWxpc2EiLCJpc0FkbWluIgfdgsgdfgdfgdfsgyrtey')
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('You are not authorised for this operation. Sign in first.');
+        done();
+      });
+  });
+  it('User should not modify entry that he had not made', (done) => {
+    chai.request(app)
+      .patch('/entries/300')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .send(mockData.Entry_1)
+      .end((_err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('error').eql('the  entry was not found');
+        done();
+      })
+  });
+  it('User should not modify another users\'s entry', (done) => {
+    chai.request(app)
+      .patch('/entries/1')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .send(mockData.Entry_1)
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('you can not edit another user\'s entry');
+        done();
+      })
+  });
+
+  // check if the user input is valid
+
+  it('User should not modify an entry with an empty title', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .send(mockData.Entry_titleEmpty)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('message').property('error').eql('title is not allowed to be empty');
+        done();
+      })
+  });
+  it('User should not modify an entry with missing title', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .send(mockData.Entry_missingTitle)
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('message').property('error').eql('title is required');
+        done();
+      })
+  });
+  it('User should not modify an entry with empty description', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .send(mockData.Entry_descriptionEmpty)
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('message').property('error').eql('description is not allowed to be empty');
+        done();
+      })
+  });
+  it('User should not modify an entry with missing description', (done) => {
+    chai.request(app)
+      .patch('/entries/5')
+      .send(mockData.Entry_missingDescription)
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('message').property('error').eql('description is required');
+        done();
+      })
+  });
+
 })
