@@ -29,7 +29,7 @@
             <a href="./createEntry.html">Create Entry</a>
           </li>
           <li>
-            <a href="./viewEntries.html">View Entries</a>
+            <a href="./viewEntries.html">Dashboard</a>
           </li>
 
           <li>
@@ -48,14 +48,22 @@
             <div class="profile">
               <img src="../images/profile.jpg">
             </div>
-            <div class="last-updated">
-              <span id="now-date">Last Updated on Mon Oct 07 2019</span>
-            </div>
-            <div class="save-entry">
-              <img title="share your entry" id="share-icon" src="../images/icons8-share-26.png">
-               <a href="../html/viewEntries.html"><img title="Discard Changes" id="discard-icon" src="../images/icons8-cancel-26.png"></a>
-               <a href="../html/viewEntries.html"><img title="Delete Entry" id="delete-icon" src="../images/icons8-trash-26.png"></a>
-              <a href="../html/viewEntries.html"><img title="Save Entry" id="save-icon" src="../images/icons8-save-26.png"></a>
+            <div class="right">
+              <div class="save-entry">
+                <img title="share your entry" id="share-icon" src="../images/icons8-share-26.png">
+                <a href="../html/viewEntries.html">
+                  <img title="Discard Changes" id="discard-icon" src="../images/icons8-cancel-26.png">
+                </a>
+                <a href="../html/viewEntries.html">
+                  <img title="Delete Entry" id="delete-icon" src="../images/icons8-trash-26.png">
+                </a>
+                <a href="../html/viewEntries.html">
+                  <img title="Save Entry" id="save-icon" src="../images/icons8-save-26.png">
+                </a>
+              </div>
+              <div class="last-updated">
+                <span id="now-date">Last Updated on Mon Oct 07 2019</span>
+              </div>
             </div>
           </div>
           <div class="edit-options">
@@ -92,16 +100,14 @@
             </span>
             <span class="Underline" title="Underline">Underline</span>
             <span class="Highlight" title="Highlight">Highlight</span>
-            <span class="Strikethrough" title="Strikethrough">Strikethrough</span>          
-              
-            <!-- <img class="load-picture" title="picture" src="../images/icons8-picture-30.png"> -->
-          
+            <span class="Strikethrough" title="Strikethrough">Strikethrough</span>
+
           </div>
           <div class="edit-title">
             <input id="edit-title" type="text" placeholder="Title..." value="My Default Diary Title">
           </div>
           <div class="entry-description">
-            <textarea name="edit-description" placeholder="Write down your thoughts" cols="38" rows="15" maxlength="1000">
+            <textarea name="edit-description" placeholder="Write down your thoughts" cols="38" rows="15" maxlength="1500" spellcheck="false">
 Lorem ipsum dolor sit amet, onsectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
 aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip
 ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
@@ -109,23 +115,11 @@ dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto o dio dignis
 augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
 id quod mazim placerat facer possim assum. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
 id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate
-velit esse molestie consequat, vel il lum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
-qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis
-eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Nam liber tempor cum soluta nobis
-eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer
-adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim
-veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel
-eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at
-vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla
-facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim
-assum. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim
-assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-              
+ id quod mazim placerat facer possim assum. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+
             </textarea>
           </div>
-          <!-- <div class="description" contenteditable="true" aria-colcount="12" aria-rowcount="10">Write down your thoughts...</div> -->
         </div>
       </div>
     </div>
@@ -138,9 +132,6 @@ assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm
       <a href="">About Us </a>
     </span>
   </div>
-  <script type="text/javascript">
-
-  </script>
 </body>
 
 </html>

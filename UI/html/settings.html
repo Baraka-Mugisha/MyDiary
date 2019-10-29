@@ -29,7 +29,7 @@
             <a href="./createEntry.html">Create Entry</a>
           </li>
           <li>
-            <a href="./viewEntries.html">View Entries</a>
+            <a href="./viewEntries.html">Dashboard</a>
           </li>
 
           <li>
@@ -79,34 +79,50 @@
           <div class="notification-settings">
             <div class="notifications-title">
               <label>Notification Reminder</label>
-
-            </div>
-            <div class="notifications-through">
-              <div>
-                <label>Send notifications to:</label>
-              </div>
-              <div>
-                <label>Desktop</label>
-                <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div>
-                <label>E-mail</label>
-                <label class="switch">
-                  <input type="checkbox" checked>
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div>
-                <label>Phone</label>
-                <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-              </div>
-            </div>
+            </div><div>
+            <table class="notifications-through">
+              <tr>
+                <td>
+                  <div>
+                    <label>Send notifications to:</label>
+                  </div>
+                </td>
+              </tr>
+              <div></div>
+              <tr>
+                <td>
+                  <label>Desktop</label>
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label>E-mail</label>
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label>Phone</label>
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+            </table></div>
             <div class="notifications-frequency">
               <div>
                 <div>
@@ -171,9 +187,6 @@
         <a href="">About Us </a>
       </span>
     </div>
-    <script type="text/javascript">
-      let profile = document.querySelector('#hidden-picture-upload');
-    </script>
 </body>
 
 </html>
