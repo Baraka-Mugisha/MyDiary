@@ -41,8 +41,26 @@ const entryController = {
     //view entries sorted in descending
       return entryFound.length !== 0 ?
         res.status(200).json({
-          status: 200, message: "success",data: entryFound.sort(function(a,b){return b.id - a.id})
-        }) : res.status(404).json({ status: 404, error: "You have not yet created an entry" })
+          status: 200, message: "success",data: entryFound.sort((a,b) => b.id - a.id
+        )}) : res.status(404).json({ status: 404, error: "You have not yet created an entry" })
+    }
+    return res.status(401).json({ status: 401, message: "You are not authorised for this operation. Sign in first." });
+  },
+  viewSpecificEntry(req, res) {
+    const user = database.users.find(user => user.email == tokens.decoded(req, res).email);
+    const id = req.params.entry_id;
+    const entry = database.entries.find(entry => entry.id === parseInt(id, 10));
+    if (user) {
+      if (!entry) { return res.status(404).json({ status: 404, message: "the  entry was not found" }) };
+      const entryFound = user.email == entry.user_email;
+      return entryFound ? res.status(200).json({
+        status: 200,
+        message: "success",
+        data: entry
+      }) : res.status(401).json({
+        status: 401,
+        error: "You are unauthorised to access this entry"
+      });
     }
     return res.status(401).json({ status: 401, message: "You are not authorised for this operation. Sign in first." });
   },

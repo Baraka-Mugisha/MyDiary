@@ -135,7 +135,23 @@ const mockData = {
     email: 'nkuru@gmail.com',
     password: 'minepassword'
   },
+  Entry_SignUp5: {
+    firstName: 'Kamamanzi',
+    lastName: 'joshua',
+    email: 'kamanzi@gmail.com',
+    password: 'kamanzipassword'
+  },
+  Entry_SignUp6: {
+    firstName: 'Muhire',
+    lastName: 'Joseph',
+    email: 'jojo@gmail.com',
+    password: 'jojopassword'
+  },
   Entry_1: {
+    title: 'Just a sign',
+    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+  },
+  Entry_2: {
     title: 'Just a sign',
     description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
   },
