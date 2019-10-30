@@ -168,6 +168,23 @@ describe('Viewing all user entries', () => {
         done();
       })
   });
+
+  it('User should create another entry', (done) => {
+    chai.request(app)
+      .post('/entries')
+      .set('Authorization', `Bearer ${tokenThree}`)
+      .send(mockData.Entry_1)
+      .end((_err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property('status').eql(201);
+        res.body.should.have.property('message').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('id');
+        res.body.data.should.have.property('title').eql('Just a sign');
+        res.body.data.should.have.property('description').eql('Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?');
+        done();
+      })
+  });
   it('User should view entries', (done) => {
     chai.request(app)
       .get('/entries')
@@ -260,7 +277,7 @@ describe('Viewing a specific entry', () => {
   });
   it('User should view a specific entry', (done) => {
     chai.request(app)
-      .get('/entries/5')
+      .get('/entries/6')
       .set('Authorization', `Bearer ${tokenFive}`)
       .end((_err, res) => {
         res.should.have.status(200);
@@ -303,16 +320,10 @@ describe('Viewing a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('message').eql('the  entry was not found');
+        res.body.should.have.property('message').eql('the entry was not found');
         done();
       })
   });
-
-  // Modify entry
-//==================
-//==================
-
-
 })
 
 // Modify entry
@@ -322,7 +333,7 @@ describe('Viewing a specific entry', () => {
 describe('Modify a specific entry', () => {
   it('User should modify an entry', (done) => {
     chai.request(app)
-      .patch('/entries/5')
+      .patch('/entries/6')
       .set('Authorization', `Bearer ${tokenFive}`)
       .send(mockData.Entry_1)
       .end((_err, res) => {
@@ -384,7 +395,6 @@ describe('Modify a specific entry', () => {
   });
 
   // check if the user input is valid
-
   it('User should not modify an entry with an empty title', (done) => {
     chai.request(app)
       .patch('/entries/5')
@@ -434,4 +444,75 @@ describe('Modify a specific entry', () => {
       })
   });
 
+  // Delete entry
+//==================
+//==================
+
+  it('User should delete an entry', (done) => {
+    chai.request(app)
+      .delete('/entries/6')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('message').eql('entry successfully deleted');
+        done();
+      });
+  });
+  it('User should not delete entry if not signed up', (done) => {
+    chai.request(app)
+      .delete('/entries/5')
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('You are not authorised for this operation. Sign in first.');
+        done();
+      });
+  });
+  it('User should not delete an entry with an invalid token', (done) => {
+    chai.request(app)
+      .delete('/entries/5')
+      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySyeryrteyrteyereryrtoiQ2hyaXN0aWFuIiwibGFzdE5hbWUiOiJLYWxpc2EiLCJpc0FkbWluIgfdgsgdfgdfgdfsgyrtey')
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('You are not authorised for this operation. Sign in first.');
+        done();
+      });
+  });
+  it('User should not delete entry that does not exist', (done) => {
+    chai.request(app)
+      .delete('/entries/300')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('message').eql('the entry was not found');
+        done();
+      })
+  });
+  it('User should not delete another users\'s entry', (done) => {
+    chai.request(app)
+      .delete('/entries/1')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('you can not delete another user\'s entries');
+        done();
+      })
+  });
+
+  it('User should not delete entry with an invalid Id', (done) => {
+    chai.request(app)
+      .delete('/entries/-10ab')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('message').property('error').eql('id with value -10ab fails to match the required pattern: /^[0-9 ]*$/');
+        done();
+      })
+  });
+  
 })

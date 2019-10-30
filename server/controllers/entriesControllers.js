@@ -51,7 +51,7 @@ const entryController = {
     const id = req.params.entry_id;
     const entry = database.entries.find(entry => entry.id === parseInt(id, 10));
     if (user) {
-      if (!entry) { return res.status(404).json({ status: 404, message: "the  entry was not found" }) };
+      if (!entry) { return res.status(404).json({ status: 404, message: "the entry was not found" }) };
       const entryFound = user.email == entry.user_email;
       return entryFound ? res.status(200).json({
         status: 200,
@@ -93,7 +93,33 @@ const entryController = {
 
     return res.status(401).json({ status: 401, error: "You are not authorised for this operation. Sign in first." });
   },
+  deleteEntry(req, res) {
+    const user = database.users.find(user => user.email === tokens.decoded(req, res).email);
+    const id = req.params.entry_id;
 
+    const result = Joi.validate({ id }, schema.entryDelete);
+    if (result.error) {
+      return res.status(400).json({ status: 400, message: { error: `${result.error.details[0].message.split('\"').join('')}` } });
+    };
+    if (user) {
+
+      const entry = database.entries.find(entry => entry.id === parseInt(id, 10));
+      if (!entry) { return res.status(404).json({ status: 404, message: "the entry was not found" }) };
+
+      // if the entry exists check if it's id matches those the user has made
+      if (entry.user_email === user.email) {
+        const entry_index = database.entries.indexOf(entry);
+        database.entries.splice(entry_index, 1);
+        return res.status(200).json({
+            status: 200,
+            message: 'entry successfully deleted',
+          });
+      }
+      return res.status(401).json({ status: 401, error: "you can not delete another user's entries" });
+    }
+    return res.status(401).json({ status: 401, error: "You are not authorised for this operation. Sign in first." });
+
+  },
 };
 
 export default entryController;
