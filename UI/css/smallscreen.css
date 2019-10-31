@@ -27,6 +27,16 @@ position: absolute;
 a {text-decoration: none;
 color: rgb(0, 0, 0);
 }
+.nav-index span{
+  display: inline-block
+}
+.hamburger{
+  font-size: 2em;
+    float: right;
+    color: white;
+    font-weight: 500
+}
+
 .nav-bar{
   background-color: var(--diaryColor);
   padding: 5px 10px;
@@ -34,20 +44,24 @@ color: rgb(0, 0, 0);
   z-index: 1;
   position: sticky;
 }
-.nav-bar div{display: inline-block}
-
 .logo {
   font-size: 40px;
   margin-left: 50px;
   font-family: Cracked Johnnie;
 }
+
+.nav-list{display: none}
+.nav-list ul{
+  padding: 0
+}
 .nav-list li{
-  display: inline-block;
+  display: block;
   list-style: none;
   font-size: 1.3em;
   font-weight: 800;
   transition: 0.5s;
-  padding: 0px 10px;
+  text-align: center;
+  padding: 2px auto;
   font-family: var(--fonts, nasalization);
   border-left: 2px solid rgba(255, 255, 255, 0);
   border-right: 2px solid rgba(255, 255, 255, 0);
@@ -55,9 +69,9 @@ color: rgb(0, 0, 0);
 .nav-list li:hover{
   border-left: 2px solid rgb(255, 255, 255);
   border-right: 2px solid rgb(255, 255, 255);
-  border-radius: 5px
+  border-radius: 5px;
+  background: rgba(11, 22, 41, 0.199);
 }
-
 .footer {
 border-top: 1px solid rgb(55, 55, 99);
   background-color: rgba(241, 248, 255, 0.151);
@@ -259,7 +273,7 @@ text-decoration: none;
  font-size: 1em;
     margin-top: 10px;
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto;
 }
 .edit-options span:hover, .edit-options img:hover{
   background-color: rgb(199, 199, 199);
@@ -400,26 +414,22 @@ text-align: center;
 }
 .edit-profile{
   margin: auto;
-  display: inline-flex;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 .edit-profile-picture{
-  display: inline-block;
-  width: 20%;
-  margin: auto 10%;
+  margin: auto;
 }
 .edit-user-credentials{
-  /* float: right; */
   display: grid;
   font-size: 1.5em;
+  padding: 20px 0;
   font-family: monospace
 }
 
 .edit-user-credentials input{
-  font-size: 15px;
+  font-size: 0.6em;
   text-align: center;
   border: none;
-  margin: 0 30px;
   background-color: whitesmoke;
   border-bottom: 2px solid rgb(199, 199, 199);
   float: right
@@ -429,37 +439,30 @@ text-align: center;
 }
 
 .settings-content{
-  padding: 1vw
+  padding: 5vw
 }
 .settings-container a{
   color: var(--diaryColor);
   font-weight: 600
 }
 .number-of-entries{
-  text-align: center;
   font-size: 20px;
-  padding: 20px;
   border-width: 1px  0;
   border-style: solid
 }
 .notification-settings{
-  display: grid;font-size: 1.4em;
-    grid-template-columns: auto auto
+  display: grid;
+  font-size: 1.4em;
 }
 .notifications-title, .notifications-message{
    text-align: center;
    font-size: 20px;
    margin-top: 20px;
    font-weight: 600;
-   grid-column: 1/span 2
 }
 .notifications-message{
   font-weight: 500;
-  margin: 0 0 5px 0;
 
-}
-.notifications-through, .notifications-frequency{
-  margin: 20px;
 }
 .notifications-through{
   border-spacing: 0;
