@@ -16,8 +16,10 @@ body {
   background-repeat: round;
   object-fit: fill;
 min-width: 100%;
+width: 100%;
 min-height: 100%;
 margin: 0px;
+background-size: cover;
 position: absolute;
 }
 .container{
@@ -29,7 +31,6 @@ color: rgb(0, 0, 0);
 }
 .nav-bar{
   background-color: var(--diaryColor);
-  /* background-image: var(--diaryColorbar); */
   padding: 5px 10px;
   top: 0;
   z-index: 1;
@@ -42,6 +43,11 @@ color: rgb(0, 0, 0);
   margin-left: 50px;
   font-family: Cracked Johnnie;
 }
+
+.hamburger{  
+display: none
+}
+  
 .nav-list li{
   display: inline-block;
   list-style: none;
@@ -56,9 +62,8 @@ color: rgb(0, 0, 0);
 .nav-list li:hover{
   border-left: 2px solid rgb(255, 255, 255);
   border-right: 2px solid rgb(255, 255, 255);
-  border-radius: 5px
-  
-
+  border-radius: 5px;  
+  background: rgba(11, 22, 41, 0.199);
 }
 .nav-list{
 float:right;
@@ -258,9 +263,6 @@ text-decoration: none;
   display: inline-block;
   vertical-align: middle;
 }
-/* .profile-save{
-  margin-bottom: 10px
-} */
 
 .edit-options img{
   width: 20px;
@@ -417,28 +419,29 @@ text-align: center;
 .edit-profile{
   margin: auto;
   display: inline-flex;
-  margin-bottom: 10px
+  margin-bottom: 10px;
+  padding: 0 5%
 }
 .edit-profile-picture{
   display: inline-block;
   width: 20%;
-  margin: auto 10%;
+  margin: auto 5% auto 10%;
 }
 .edit-user-credentials{
-  /* float: right; */
   display: grid;
-  font-size: 1.5em;
-  font-family: monospace
+  font-size: 1.4em;
+  font-family: monospace;
+  padding: 20px 0
 }
 
 .edit-user-credentials input{
   font-size: 15px;
-  text-align: center;
-  border: none;
-  margin: 0 30px;
-  background-color: whitesmoke;
-  border-bottom: 2px solid rgb(199, 199, 199);
-  float: right
+    text-align: center;
+    border: none;
+    margin: 0 0 0 30px;
+    background-color: whitesmoke;
+    border-bottom: 2px solid rgb(199, 199, 199);
+    float: right;
 }
 .edit-user-credentials div label{
   float: left;
@@ -759,7 +762,7 @@ textarea {
 width: 47%;
 padding:10px;
 margin: 5px 0;
-font-size: 1.4em;
+font-size: 1em;
 border-radius: 10px;
 transition: 0.5s;
 background-color: rgba(146, 138, 184, 0.116)
@@ -772,7 +775,7 @@ background-color: rgba(146, 138, 184, 0.116)
 .contact-content textarea:hover,
 .contact-content textarea:focus {
 background-color: #ced2ee;
-color: rgba(226, 228, 255, 0.247)
+color: rgb(0, 0, 0)
 }
 
 #submit-feedback-btn{

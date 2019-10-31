@@ -18,10 +18,10 @@
   <div class="container">
     <div class="nav-bar">
       <div class="nav-index">
-
         <span class="logo">
           <a href="../index.html">MyDiary</a>
         </span>
+        <span class="hamburger">&#9776</span>
       </div>
       <div class="nav-list">
         <ul>
@@ -60,7 +60,7 @@
                 <input value="email@gmail.com">
               </div>
               <div>
-                <label>Phone Number</label>
+                <label>Phone</label>
                 <input placeholder="+250-">
               </div>
               <div>
@@ -79,50 +79,52 @@
           <div class="notification-settings">
             <div class="notifications-title">
               <label>Notification Reminder</label>
-            </div><div>
-            <table class="notifications-through">
-              <tr>
-                <td>
-                  <div>
-                    <label>Send notifications to:</label>
-                  </div>
-                </td>
-              </tr>
-              <div></div>
-              <tr>
-                <td>
-                  <label>Desktop</label>
-                </td>
-                <td>
-                  <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label>E-mail</label>
-                </td>
-                <td>
-                  <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label>Phone</label>
-                </td>
-                <td>
-                  <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-            </table></div>
+            </div>
+            <div>
+              <table class="notifications-through">
+                <tr>
+                  <td>
+                    <div>
+                      <label>Send notifications to:</label>
+                    </div>
+                  </td>
+                </tr>
+                <div></div>
+                <tr>
+                  <td>
+                    <label>Desktop</label>
+                  </td>
+                  <td>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>E-mail</label>
+                  </td>
+                  <td>
+                    <label class="switch">
+                      <input type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Phone</label>
+                  </td>
+                  <td>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+              </table>
+            </div>
             <div class="notifications-frequency">
               <div>
                 <div>
@@ -159,7 +161,7 @@
                   </select>
                 </div>
                 <div>
-                  <label>Activate Notifications</label>
+                  <label>Receive Notifications</label>
                   <label class="switch">
                     <input type="checkbox" checked>
                     <span class="slider round"></span>
@@ -188,5 +190,7 @@
       </span>
     </div>
 </body>
+<script type="text/javascript" src="../js/hamburger.js">
+</script>
 
 </html>
