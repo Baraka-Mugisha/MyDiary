@@ -4,7 +4,6 @@ import userModel from '../Models/userModel';
 import tokens from '../helpers/tokens';
 import { schema } from '../middlewares/validation';
 import response from '../helpers/Returns';
-import displayMessage from '../helpers/displayMessages';
 import statusCode from '../helpers/statusMessages';
 
 const entryController = {
@@ -52,7 +51,7 @@ const entryController = {
 		const user = userModel.find((user) => user.email === tokens.decoded(req, res).email);
 		const id = req.params.entry_id;
 
-		const result = Joi.validate({ id }, schema.entryId);
+		const result = Joi.validate( {id} , schema.entryId);
 		if (result.error) {
 			return response.Validation(res, statusCode.BadRequest, result);
 		}
@@ -104,7 +103,7 @@ const entryController = {
 		const user = userModel.find((user) => user.email === tokens.decoded(req, res).email);
 		const id = req.params.entry_id;
 
-		const result = Joi.validate({ id }, schema.entryId);
+		const result = Joi.validate( {id} , schema.entryId);
 		if (result.error) {
 			return response.Validation(res, statusCode.BadRequest, result);
 		}
