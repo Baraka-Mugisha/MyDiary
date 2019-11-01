@@ -158,4 +158,4 @@ git push origin branchnameforyourchanges
 
 [Baraka-uwimana](http://github.com/mugishaje/) - Github
 
-gitegob7@gmail.com - GMAIL
+mugishaje@gmail.com - GMAIL
