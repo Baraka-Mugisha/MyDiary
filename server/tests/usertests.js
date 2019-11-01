@@ -6,32 +6,41 @@ import mockData from './mockData';
 chai.use(chaiHttp);
 chai.should();
 
+let loginToken;
+let wrongToken = 'hdsfhjsadyfurewnfdsfjkavc fahjkregdsdgqedf'
 // Signing up
 describe('User signup test: case 1', () => {
   it('it should sign up a user', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_complete)
+      .send(mockData.SignUp_perfect)
       .end((_err, res) => {
+        loginToken = res.body.data.token;
         res.should.have.status(201);
         res.body.should.have.property('status').eql(201);
         res.body.should.have.property('message').eql('The User was created successfully');
         res.body.should.have.property('data');
-        res.body.data.should.have.property('id');
         res.body.data.should.have.property('token');
-        res.body.data.should.have.property('firstName').eql('Bran');
-        res.body.data.should.have.property('lastName').eql('Stark');
-        res.body.data.should.have.property('email').eql('bstark@gmail.com');
-        res.body.data.should.not.have.property('password');
         done();
       });
   });
+  it('it should not sign up an already existing user', (done) => {
+    chai.request(app)
+      .post('/auth/signup')
+      .send(mockData.SignUp_perfect)
+      .end((_err, res) => {
+        res.body.should.have.property('status').eql(409);
+        res.body.should.have.property('error').eql('The user with that email already exists');
+      });
+    done();
+  });
 
+  // validations tests
 
   it('it should not create a user account with missing email', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_noEmail)
+      .send(mockData.SignUp_withoutEmail)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -39,7 +48,6 @@ describe('User signup test: case 1', () => {
         done();
       });
   });
-
   it('it should not sign up a user when password is less than 8 characters', (done) => {
     chai.request(app)
       .post('/auth/signup')
@@ -47,11 +55,10 @@ describe('User signup test: case 1', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('password with value git fails to match the required pattern: /^[a-zA-Z0-9]{8,30}$/');
+        res.body.should.have.property('error').eql('password is not valid');
         done();
       });
   });
-
   it('it should not sign up a user when the firstname is numbers', (done) => {
     chai.request(app)
       .post('/auth/signup')
@@ -59,11 +66,10 @@ describe('User signup test: case 1', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('firstName with value 1234 fails to match the required pattern: /^\\S[A-Za-z]{1,}$/');
+        res.body.should.have.property('error').eql('firstName is not valid');
         done();
       });
   });
-
   it('it should not sign up a user account when the lastName is numbers', (done) => {
     chai.request(app)
       .post('/auth/signup')
@@ -71,11 +77,10 @@ describe('User signup test: case 1', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('lastName with value 1234 fails to match the required pattern: /^\\S[A-Za-z]{1,}$/');
+        res.body.should.have.property('error').eql('lastName is not valid');
         done();
       });
   });
-
   it('it should not sign up an user account when the firstName contains a whitespace', (done) => {
     chai.request(app)
       .post('/auth/signup')
@@ -83,11 +88,10 @@ describe('User signup test: case 1', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('firstName with value Bran Bob fails to match the required pattern: /^\\S[A-Za-z]{1,}$/');
+        res.body.should.have.property('error').eql('firstName is not valid');
         done();
       });
   });
-
   it('it should not sign up a user account when the lastName contains a whitespace', (done) => {
     chai.request(app)
       .post('/auth/signup')
@@ -95,14 +99,14 @@ describe('User signup test: case 1', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('lastName with value Stark Man fails to match the required pattern: /^\\S[A-Za-z]{1,}$/');
+        res.body.should.have.property('error').eql('lastName is not valid');
         done();
       });
   });
   it('it should not sign up a user account with no password', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_noPswd)
+      .send(mockData.SignUp_withoutPswd)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -113,7 +117,7 @@ describe('User signup test: case 1', () => {
   it('it should not sign up a user account with no firstName', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_nofirstName)
+      .send(mockData.SignUpfirstName)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -124,7 +128,7 @@ describe('User signup test: case 1', () => {
   it('it should not sign up a user account with no lastName', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_nolastName)
+      .send(mockData.SignUp_withoutlastName)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -135,7 +139,7 @@ describe('User signup test: case 1', () => {
   it('it should not sign up a user account with empty lastName', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_emptylastName)
+      .send(mockData.SignUp_withVoidlastName)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -146,7 +150,7 @@ describe('User signup test: case 1', () => {
   it('it should not sign up a user account with empty firstName', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_emptyfirstName)
+      .send(mockData.SignUp_withVoidfirstName)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -157,7 +161,7 @@ describe('User signup test: case 1', () => {
   it('it should not sign up a user account with empty email', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_emptyEmail)
+      .send(mockData.SignUp_withVoidEmail)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -168,7 +172,7 @@ describe('User signup test: case 1', () => {
   it('it should not sign up a user account with empty password', (done) => {
     chai.request(app)
       .post('/auth/signup')
-      .send(mockData.SignUp_emptyPswd)
+      .send(mockData.SignUp_withVoidPswd)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
@@ -178,83 +182,17 @@ describe('User signup test: case 1', () => {
   });
 });
 
-describe('User sign up test: case 2', () => {
-  beforeEach('sign up an employee', (done) => {
-    chai.request(app)
-      .post('/auth/signup')
-      .send(mockData.SignUp_complete)
-      .end((error, _res) => {
-        done();
-      });
-  });
-  it('it should not sign up an already existing employee', (done) => {
-    chai.request(app)
-      .post('/auth/signup')
-      .send(mockData.SignUp_complete)
-      .end((_err, res) => {
-        res.body.should.have.property('status').eql(409);
-        res.body.should.have.property('error').eql('The user with that email already exists');
-      });
-    done();
-  });
-});
 // Logging in
 describe('User Login test', () => {
-  beforeEach('Create an employee', (done) => {
-    chai.request(app)
-      .post('/auth/signup')
-      .send(mockData.SignUp_complete2)
-      .end((error) => {
-        done();
-      });
-  });
   it('it should login a user', (done) => {
     chai.request(app)
       .post('/auth/signin')
-      .send(mockData.Login_complete)
+      .send(mockData.Login_perfect)
       .end((_err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('status').eql(200);
         res.body.should.have.property('data');
         res.body.data.should.have.property('token');
-        res.body.data.should.have.property('id');
-        res.body.data.should.have.property('firstName').eql('Ben');
-        res.body.data.should.have.property('lastName').eql('Gisa');
-        res.body.data.should.have.property('email').eql('bengisa@gmail.com');
-        res.body.should.have.property('message').eql('User found');
-        done();
-      });
-  });
-  it('it should not login a user with no email', (done) => {
-    chai.request(app)
-      .post('/auth/signin')
-      .send(mockData.Login_noEmail)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('email is required');
-        done();
-      });
-  });
-  it('it should not login a user with no password', (done) => {
-    chai.request(app)
-      .post('/auth/signin')
-      .send(mockData.Login_noPassword)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('password is required');
-        done();
-      });
-  });
-  it('it should not login a user with wrong password', (done) => {
-    chai.request(app)
-      .post('/auth/signin')
-      .send(mockData.Login_wrongPswd)
-      .end((err, res) => {
-        res.should.have.status(401);
-        res.body.should.have.property('status').eql(401);
-        res.body.should.have.property('error').eql('enter the correct password');
         done();
       });
   });
@@ -266,6 +204,17 @@ describe('User Login test', () => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
         res.body.should.have.property('error').eql('There is no such user with that email');
+        done();
+      });
+  });
+  it('it should not login a user who does not have account', (done) => {
+    chai.request(app)
+      .post('/auth/signin')
+      .send(mockData.Login_wrongPassword)
+      .end((err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('error').eql('enter the correct password');
         done();
       });
   });
