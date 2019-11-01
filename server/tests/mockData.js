@@ -1,131 +1,124 @@
 const mockData = {
-  SignUp_complete: {
-    firstName: 'Bran',
-    lastName: 'Stark',
-    email: 'bstark@gmail.com',
-    password: '123455678'
+  SignUp_perfect: {
+    firstName: 'Emmanuel',
+    lastName: 'Christophe',
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
-  SignUp_noEmail: {
-    firstName: 'Bran',
-    lastName: 'stark',
-    password: '12345678'
+  SignUp_withoutEmail: {
+    firstName: 'Emmanuel',
+    lastName: 'Christophe',
+    password: 'pass1234'
   },
-  SignUp_noPswd: {
-    firstName: 'Bran',
-    lastName: 'stark',
-    email: 'bstark@gmail.com',
+  SignUp_withoutPswd: {
+    firstName: 'Emmanuel',
+    lastName: 'Christophe',
+    email: 'Christophe@gmail.com',
   },
-  SignUp_nolastName: {
-    firstName: 'Bran',
-    email: 'bstark@gmail.com',
-    password: '123455678'
+  SignUp_withoutlastName: {
+    firstName: 'Emmanuel',
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
-  SignUp_nofirstName: {
-    lastName: 'Stark',
-    email: 'bstark@gmail.com',
-    password: '123455678'
+  SignUp_withoutfirstName: {
+    lastName: 'Christophe',
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
-  SignUp_emptyPswd: {
-    email: 'bstark@gmail.com',
-    firstName: 'Bran',
-    lastName: 'stark',
+  SignUp_withVoidPswd: {
+    email: 'Christophe@gmail.com',
+    firstName: 'Emmanuel',
+    lastName: 'Christophe',
     password: ''
   },
-  SignUp_emptyfirstName: {
+  SignUp_withVoidfirstName: {
     firstName: '',
-    lastName: 'Stark',
-    email: 'bstark@gmail.com',
-    password: '123455678'
+    lastName: 'Christophe',
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
-  SignUp_emptylastName: {
-    firstName: 'Bran',
+  SignUp_withVoidlastName: {
+    firstName: 'Emmanuel',
     lastName: '',
-    email: 'bstark@gmail.com',
-    password: '123455678'
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
-  SignUp_emptyEmail: {
-    firstName: 'Bran',
-    lastName: 'Stark',
+  SignUp_withVoidEmail: {
+    firstName: 'Emmanuel',
+    lastName: 'Christophe',
     email: '',
-    password: '123455678'
+    password: 'pass1234'
   },
   SignUp_ShortPswd: {
-    firstName: 'Bran',
-    lastName: 'stark',
-    email: 'bstark@gmail.com',
-    password: 'git'
+    firstName: 'Emmanuel',
+    lastName: 'Christophe',
+    email: 'Christophe@gmail.com',
+    password: 'pass'
   },
   SignUp_IntFirstName: {
     firstName: '1234',
-    lastName: 'stark',
-    email: 'bstark@gmail.com',
-    password: 'git'
+    lastName: 'Christophe',
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
   SignUp_IntLastName: {
-    firstName: 'Bran',
+    firstName: 'Emmanuel',
     lastName: '1234',
-    email: 'bstark@gmail.com',
-    password: 'git'
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
   SignUp_WhitespaceFirstName: {
-    firstName: 'Bran Bob',
+    firstName: 'Emmanuel Dede',
     lastName: '1234',
-    email: 'bstark@gmail.com',
-    password: 'git'
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
   SignUp_WhitespaceLastName: {
-    firstName: 'Bran',
-    lastName: 'Stark Man',
-    email: 'bstark@gmail.com',
-    password: 'git'
+    firstName: 'Emmanuel',
+    lastName: 'Christophe Dede',
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
 
   // Sign In
 
-  SignUp_complete2: {
-    firstName: 'Ben',
-    lastName: 'Gisa',
-    email: 'bengisa@gmail.com',
-    password: 'monsieurmsolin'
+  SignUp_perfect2: {
+    firstName: 'pierre',
+    lastName: 'Dominic',
+    email: 'pierre@gmail.com',
+    password: 'pass12345'
   },
-  Login_complete: {
-    email: 'bengisa@gmail.com',
-    password: 'monsieurmsolin'
+  Login_wrongToken: {
+    token: "hasuwyuebfncx nzcskdfweiyfertrjgkdsoowueresdgshdfjhswieri"
   },
-  Login_noEmail: {
-    password: 'monsieurmsolin'
-  },
-  Login_noPassword: {
-    email: 'bengisa@gmail.com'
-  },
-  Login_wrongPswd: {
-    email: 'bengisa@gmail.com',
-    password: 'mistermsolin'
-  },
-
   Login_wrongEmail: {
-    email: 'brucesangwa@gmail.com',
-    password: 'udontevenknow'
+    email: 'memory@gmail.com',
+    password: 'dash1234'
+  }, Login_wrongPassword: {
+    email: 'baraka@gmail.com',
+    password: 'dash1234'
   },
-
+  Login_perfect: {
+      email: 'Christophe@gmail.com',
+      password: 'pass1234'
+  },
   //Entries MockData
 
-
-   Entry_SignUp: {
+  Entry_SignUp: {
     firstName: 'Baraka',
-    lastName: 'Mugisha',
+    lastName: 'Uwimana',
     email: 'mugishaje@gmail.com',
-    password: '12345678'
+    password: 'pass1234'
   },
   Entry_SignUp2: {
-    firstName: 'James',
-    lastName: 'Nyagatare',
-    email: 'jimnyagtr@gmail.com',
-    password: 'complicatedpassword'
+    firstName: 'Kamana',
+    lastName: 'Didier',
+    email: 'KamaDi@gmail.com',
+    password: 'pass12345'
   },
   Entry_SignUp3: {
-    firstName: 'James',
-    lastName: 'Nyagatare',
+    firstName: 'Kamana',
+    lastName: 'Didier',
     email: 'nkundi@gmail.com',
     password: 'mymydpassword'
   },
@@ -148,26 +141,26 @@ const mockData = {
     password: 'jojopassword'
   },
   Entry_1: {
-    title: 'Just a sign',
-    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+    title: 'This is my title',
+    description: 'This is my description of of my diary entry'
   },
   Entry_2: {
-    title: 'Just a sign',
-    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+    title: 'This is my title',
+    description: 'This is my description of of my diary entry'
   },
   Entry_titleEmpty: {
     title: '',
-    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+    description: 'This is my description of of my diary entry'
   },
   Entry_descriptionEmpty: {
-    title: 'Just a sign',
+    title: 'This is my title',
     description: ''
   },
   Entry_missingTitle: {
-    description: 'Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?'
+    description: 'This is my description of of my diary entry'
   },
   Entry_missingDescription: {
-    title: 'Just a sign'
+    title: 'This is my title'
   },
 };
 

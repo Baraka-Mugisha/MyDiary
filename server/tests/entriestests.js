@@ -48,15 +48,15 @@ describe('Creating an entry', () => {
         res.body.should.have.property('message').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.property('id');
-        res.body.data.should.have.property('title').eql('Just a sign');
-        res.body.data.should.have.property('description').eql('Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?');
+        res.body.data.should.have.property('title').eql('This is my title');
+        res.body.data.should.have.property('description').eql('This is my description of of my diary entry');
         done();
       });
   });
   it('User should not create an entry if not signed up', (done) => {
     chai.request(app)
       .post('/entries')
-      .send(mockData.Entry_2)  // entry 2
+      .send(mockData.Entry_2)  
       .end((_err, res) => {
         res.should.have.status(401);
         res.body.should.have.property('status').eql(401);
@@ -78,7 +78,7 @@ describe('Creating an entry', () => {
   });
   it('User should not create an entry with an empty title', (done) => {
     chai.request(app)
-      .post('/entries') 
+      .post('/entries')
       .set('Authorization', `Bearer ${token}`)
       .send(mockData.Entry_titleEmpty)
       .end((_err, res) => {
@@ -90,7 +90,7 @@ describe('Creating an entry', () => {
   });
   it('User should not create an entry with missing title', (done) => {
     chai.request(app)
-      .post('/entries') 
+      .post('/entries')
       .send(mockData.Entry_missingTitle)
       .set('Authorization', `Bearer ${token}`)
       .end((_err, res) => {
@@ -103,7 +103,7 @@ describe('Creating an entry', () => {
   });
   it('User should not create an entry with empty description', (done) => {
     chai.request(app)
-      .post('/entries')       
+      .post('/entries')
       .send(mockData.Entry_descriptionEmpty)
       .set('Authorization', `Bearer ${token}`)
       .end((_err, res) => {
@@ -116,7 +116,7 @@ describe('Creating an entry', () => {
   it('User should not create an entry with missing description', (done) => {
     chai.request(app)
       .post('/entries')
-       //  entry 7
+      //  entry 7
       .send(mockData.Entry_missingDescription)
       .set('Authorization', `Bearer ${token}`)
       .end((_err, res) => {
@@ -154,7 +154,7 @@ describe('Viewing all user entries', () => {
   });
   it('User should create an entry', (done) => {
     chai.request(app)
-      .post('/entries')  
+      .post('/entries')  // entry 2
       .set('Authorization', `Bearer ${tokenThree}`)
       .send(mockData.Entry_1)
       .end((_err, res) => {
@@ -163,15 +163,15 @@ describe('Viewing all user entries', () => {
         res.body.should.have.property('message').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.property('id');
-        res.body.data.should.have.property('title').eql('Just a sign');
-        res.body.data.should.have.property('description').eql('Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?');
+        res.body.data.should.have.property('title').eql('This is my title');
+        res.body.data.should.have.property('description').eql('This is my description of of my diary entry');
         done();
       })
   });
 
   it('User should create another entry', (done) => {
     chai.request(app)
-      .post('/entries')
+      .post('/entries')  //entry 3
       .set('Authorization', `Bearer ${tokenThree}`)
       .send(mockData.Entry_1)
       .end((_err, res) => {
@@ -180,8 +180,8 @@ describe('Viewing all user entries', () => {
         res.body.should.have.property('message').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.property('id');
-        res.body.data.should.have.property('title').eql('Just a sign');
-        res.body.data.should.have.property('description').eql('Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?');
+        res.body.data.should.have.property('title').eql('This is my title');
+        res.body.data.should.have.property('description').eql('This is my description of of my diary entry');
         done();
       })
   });
@@ -261,7 +261,7 @@ describe('Viewing a specific entry', () => {
   });
   it('User should create an entry', (done) => {
     chai.request(app)
-      .post('/entries')   // entry 5
+      .post('/entries')   // entry 4
       .set('Authorization', `Bearer ${tokenFive}`)
       .send(mockData.Entry_1)
       .end((_err, res) => {
@@ -270,8 +270,8 @@ describe('Viewing a specific entry', () => {
         res.body.should.have.property('message').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.property('id');
-        res.body.data.should.have.property('title').eql('Just a sign');
-        res.body.data.should.have.property('description').eql('Looking at the world through my rearview, searching for an answer up high, or is it all wasted time?');
+        res.body.data.should.have.property('title').eql('This is my title');
+        res.body.data.should.have.property('description').eql('This is my description of of my diary entry');
         done();
       })
   });
@@ -294,7 +294,7 @@ describe('Viewing a specific entry', () => {
   });
   it('User should not view a specific entry if not signed up', (done) => {
     chai.request(app)
-      .get('/entries/3')
+      .get('/entries/6')
       .end((_err, res) => {
         res.should.have.status(401);
         res.body.should.have.property('status').eql(401);
@@ -304,7 +304,7 @@ describe('Viewing a specific entry', () => {
   });
   it('User should not view a specific entry with an invalid token', (done) => {
     chai.request(app)
-      .get('/entries/3')
+      .get('/entries/6')
       .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLTMwMGViODQwIiwiZW1haWwiOiJrYWxpc2FAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiQ2hyaXN0aWFuIiwibGFzdE5hbWUiOiJLYWxpc2EiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTY5MzI4MjY5fQ.Rzbk2yB0hM-vUV5OokmiIHT7IrTIPDuFXE3VYekDeo0')
       .end((_err, res) => {
         res.should.have.status(401);
@@ -321,6 +321,17 @@ describe('Viewing a specific entry', () => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
         res.body.should.have.property('message').eql('the entry was not found');
+        done();
+      })
+  });
+  it('User should not view entry with an invalid Id', (done) => {
+    chai.request(app)
+      .get('/entries/-10ab')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('id is not valid');
         done();
       })
   });
@@ -403,7 +414,7 @@ describe('Modify a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('message').property('error').eql('title is not allowed to be empty');
+        res.body.should.have.property('error').eql('title is not allowed to be empty');
         done();
       })
   });
@@ -415,7 +426,7 @@ describe('Modify a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('message').property('error').eql('title is required');
+        res.body.should.have.property('error').eql('title is required');
         done();
       })
   });
@@ -427,7 +438,7 @@ describe('Modify a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('message').property('error').eql('description is not allowed to be empty');
+        res.body.should.have.property('error').eql('description is not allowed to be empty');
         done();
       })
   });
@@ -439,14 +450,14 @@ describe('Modify a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('message').property('error').eql('description is required');
+        res.body.should.have.property('error').eql('description is required');
         done();
       })
   });
 
   // Delete entry
-//==================
-//==================
+  //==================
+  //==================
 
   it('User should delete an entry', (done) => {
     chai.request(app)
@@ -510,9 +521,9 @@ describe('Modify a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('message').property('error').eql('id with value -10ab fails to match the required pattern: /^[0-9 ]*$/');
+        res.body.should.have.property('error').eql('id is not valid');
         done();
       })
   });
-  
+
 })

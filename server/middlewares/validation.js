@@ -23,7 +23,7 @@ export const schema = {
         description: Joi.string().min(1).max(1000).required(),
         entry_id: Joi.number().min(1).max(10),
     }),
-    entryDelete: Joi.object().keys({
+    entryId: Joi.object().keys({
         id: Joi.string().regex(/^[0-9 ]*$/).min(1).max(30)
     }),
 };
