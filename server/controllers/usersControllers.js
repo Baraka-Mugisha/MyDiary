@@ -4,13 +4,11 @@ import tokens from '../helpers/tokens';
 import bcryptPwd from '../helpers/bcryptPwd';
 import { schema } from '../middlewares/validation';
 import response from '../helpers/Returns';
-import displayMessage from '../helpers/displayMessages';
 import statusCode from '../helpers/statusMessages';
 
 export const userController = {
 	signUp(req, res) {
 		// check sign up details if valid with joi
-
 		let {
 			email, firstName, lastName, password
 		} = req.body;
@@ -26,7 +24,6 @@ export const userController = {
 		if (user) {
 			return res.status(409).json({ status: 409, error: 'The user with that email already exists' });
 		}
-
 		const id = userModel.length + 1;
 		const payload = {
 			id, firstName, lastName, email
@@ -39,12 +36,11 @@ export const userController = {
 		const newUser = {
 			id, email, password, firstName, lastName, token
 		};
-		userModel.push(newUser);
-		
+		userModel.push(newUser);		
 		return res.status(201).json({
 			status: 201,
 			message: "The User was created successfully",
-			data: { token, id, firstName, lastName, email }
+			data: { token }
 		})
 	},
 	signIn(req, res) {
