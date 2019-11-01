@@ -1,27 +1,19 @@
-import Joi from 'joi';
 import entriesModel from '../Models/entriesModel';
 import userModel from '../Models/userModel';
 import tokens from '../helpers/tokens';
-import { schema } from '../middlewares/validation';
-import response from '../helpers/Returns';
-import statusCode from '../helpers/statusMessages';
+import ReturnIt from '../helpers/returnIt';
+import dispMessages from '../helpers/displayMessages';
 
 const entryController = {
 	createEntry(req, res) {
 		const user = userModel.find((user) => user.email === tokens.decoded(req, res).email);
-    const { title, description } = req.body;
-    
-		if (!user) { return res.status(401).json({ status: 401, message: 'You are not authorised for this operation. Sign in first.' }); }
-		const result = Joi.validate({ title, description }, schema.entries);
-		if (result.error) {
-			return response.Validation(res, statusCode.BadRequest, result);
-		}
+
+		if (!user) { return ReturnIt.Message(res, 401, dispMessages.signInFirst) }
 		const date = new Date();
 
-		// if the user exists
 		const newEntry = {
 			user_email: user.email,
-			id: entriesModel.length + 1,
+			id: entriesModel[entriesModel.length - 1].id + 1,
 			createdOn: `${date.getHours()}:${date.getMinutes()}, ${date.toDateString()}`,
 			title: req.body.title,
 			description: req.body.description,
@@ -30,99 +22,66 @@ const entryController = {
 		entriesModel.push(newEntry);
 		const entryDisp = { ...newEntry };
 		delete entryDisp.user_email;
-		return res.status(201).json({ status: 201, message: 'success', data: entryDisp });
+		return ReturnIt.Success(res, 201, dispMessages.success, entryDisp );
 	},
 	viewEntries(req, res) {
 		const user = userModel.find(user => user.email == tokens.decoded(req, res).email);
 		const entryFound = entriesModel.filter(entry => entry.user_email == tokens.decoded(req, res).email);
+		const entry = entryFound.sort((a, b) => b.id - a.id);
 
 		if (user) {
-
-			//view entries sorted in descending
-			return entryFound.length !== 0 ?
-				res.status(200).json({
-					status: 200, message: "success", data: entryFound.sort((a, b) => b.id - a.id
-					)
-				}) : res.status(404).json({ status: 404, error: "You have not yet created an entry" })
+			return entry.length !== 0 ? ReturnIt.Success(res, 200, dispMessages.success, entry) : ReturnIt.Error(res, 404, dispMessages.emptyEntry)
 		}
-		return res.status(401).json({ status: 401, message: 'You are not authorised for this operation. Sign in first.' });
+		return ReturnIt.Message(res, 401, dispMessages.signInFirst);
 	},
 	viewSpecificEntry(req, res) {
 		const user = userModel.find((user) => user.email === tokens.decoded(req, res).email);
 		const id = req.params.entry_id;
-
-		const result = Joi.validate( {id} , schema.entryId);
-		if (result.error) {
-			return response.Validation(res, statusCode.BadRequest, result);
-		}
 		const entry = entriesModel.find((entry) => entry.id === parseInt(id, 10));
 		if (user) {
-			if (!entry) { return res.status(404).json({ status: 404, message: 'the entry was not found' }); }
+			if (!entry) { 
+				return ReturnIt.Message(res, 404, dispMessages.entryNotFound); 
+			}
 			const entryFound = user.email === entry.user_email;
-			return entryFound ? res.status(200).json({
-				status: 200,
-				message: 'success',
-				data: entry
-			}) : res.status(401).json({
-				status: 401,
-				error: 'You are unauthorised to access this entry'
-			});
+			return entryFound ? ReturnIt.Success(res, 200, dispMessages.success, entry) : ReturnIt.Error(res, 401, dispMessages.entryNotYours);
 		}
-		return res.status(401).json({ status: 401, message: 'You are not authorised for this operation. Sign in first.' });
+		return ReturnIt.Message(res, 401, dispMessages.signInFirst);
 	},
 	modifyEntry(req, res) {
 		const user = userModel.find((user) => user.email === tokens.decoded(req, res).email);
 		const id = req.params.entry_id;
-		const { title } = req.body;
-		const { description } = req.body;
+		const { title, description } = req.body;
 
 		const entry = entriesModel.find((entry) => entry.id === parseInt(id, 10));
 		if (user) {
-			// validate the user input
-			const result = Joi.validate({ id, title, description }, schema.entries);
-			if (result.error) {
-				return response.Validation(res, statusCode.BadRequest, result);
-			}
-
-			if (!entry) { return res.status(404).json({ status: 404, error: 'the  entry was not found' }); }
+			if (!entry) { return ReturnIt.Error(res, 404, dispMessages.entryNotFound ); }
 
 			if (entry.user_email === user.email) {
 				const date = new Date();
 				entriesModel.find((entry) => entry.id === parseInt(id, 10)).description = description;
 				entriesModel.find((entry) => entry.id === parseInt(id, 10)).title = title;
 				entriesModel.find((entry) => entry.id === parseInt(id, 10)).createdOn = `${date.getHours()}:${date.getMinutes()}, ${date.toDateString()}`;
-				return res.status(200).json({ status: 200, message: 'entry successfully edited', data: { title, description } });
+				return ReturnIt.Success(res, 200, dispMessages.entryEdited, { title, description });
 			}
-
-			return res.status(401).json({ status: 401, error: "you can not edit another user's entry" });
+			return ReturnIt.Error(res, 401, dispMessages.editDenied);
 		}
-
-		return res.status(401).json({ status: 401, error: 'You are not authorised for this operation. Sign in first.' });
+		return ReturnIt.Error(res, 401, dispMessages.signInFirst);
 	},
 	deleteEntry(req, res) {
 		const user = userModel.find((user) => user.email === tokens.decoded(req, res).email);
 		const id = req.params.entry_id;
-
-		const result = Joi.validate( {id} , schema.entryId);
-		if (result.error) {
-			return response.Validation(res, statusCode.BadRequest, result);
-		}
 		if (user) {
 			const entry = entriesModel.find((entry) => entry.id === parseInt(id, 10));
-			if (!entry) { return res.status(404).json({ status: 404, message: 'the entry was not found' }); }
+			if (!entry) { return ReturnIt.Message(res, 404, dispMessages.entryNotFound); }
 
-			// if the entry exists check if it's id matches those the user has made
 			if (entry.user_email === user.email) {
 				const entry_index = entriesModel.indexOf(entry);
 				entriesModel.splice(entry_index, 1);
-				return res.status(200).json({
-					status: 200,
-					message: 'entry successfully deleted',
-				});
+				return ReturnIt.Message(res, 200,	dispMessages.entryDeleted);
 			}
-			return res.status(401).json({ status: 401, error: "you can not delete another user's entries" });
+			return ReturnIt.Error(res, 401, dispMessages.deleteDenied );
 		}
-		return res.status(401).json({ status: 401, error: 'You are not authorised for this operation. Sign in first.' });
+		return ReturnIt.Error(res, 401, dispMessages.signInFirst );
 	},
 }
 

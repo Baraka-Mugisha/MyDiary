@@ -388,7 +388,7 @@ describe('Modify a specific entry', () => {
       .end((_err, res) => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('error').eql('the  entry was not found');
+        res.body.should.have.property('error').eql('the entry was not found');
         done();
       })
   });

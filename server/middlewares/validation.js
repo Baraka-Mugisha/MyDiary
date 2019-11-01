@@ -1,7 +1,8 @@
 import Joi from 'joi';
-// import hapiJoi from '@hapi/joi';
+import response from '../middlewares/ValidationReturn';
+import statusCode from '../helpers/statusMessages';
 
-export const schema = {
+const validate = {
     user_sign_up: Joi.object().keys({
         firstName: Joi.string().regex(/^\S[A-Za-z]{1,}$/).min(3).max(30).required(),
         lastName: Joi.string().regex(/^\S[A-Za-z]{1,}$/).min(3).max(30).required(),
@@ -9,13 +10,11 @@ export const schema = {
         password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/).required(),
         token: [Joi.string(), Joi.number()],
         is_admin: Joi.string().valid('true', 'false')
-
     }),
     user_sign_in: Joi.object().keys({
         email: Joi.string().email({ minDomainAtoms: 2 }).required(),
         password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
         token: [Joi.string(), Joi.number()],
-
     }),
     entries: Joi.object().keys({
         id: Joi.string().regex(/^[0-9 ]*$/).min(1).max(30),
@@ -26,4 +25,65 @@ export const schema = {
     entryId: Joi.object().keys({
         id: Joi.string().regex(/^[0-9 ]*$/).min(1).max(30)
     }),
+
+    ValidateSignUp(req, res, _next) {
+        let {
+            email, firstName, lastName, password
+        } = req.body;
+        let result = Joi.validate({
+            email, firstName, lastName, password
+        }, validate.user_sign_up);
+        if (result.error) {
+            return response.Validation(res, statusCode.BadRequest, result);
+        };
+        return _next();
+    },
+    ValidateSignIn(req, res, _next) {
+        let { email, password } = req.body;
+
+        let result = Joi.validate({ email, password }, validate.user_sign_in);
+        if (result.error) {
+            return response.Validation(res, statusCode.BadRequest, result);
+        };
+        return _next()
+    },
+    ValidateCreateEntry(req, res, _next) {
+        let { title, description } = req.body;
+
+        let result = Joi.validate({ title, description }, validate.entries);
+        if (result.error) {
+            return response.Validation(res, statusCode.BadRequest, result);
+        };
+        return _next()
+    },
+    ValidateSpecificEntry(req, res, _next) {
+        let id = req.params.entry_id;
+
+        const result = Joi.validate({ id }, validate.entryId);
+        if (result.error) {
+            return response.Validation(res, statusCode.BadRequest, result);
+        };
+        return _next()
+    },
+    ValidateModifyEntry(req, res, _next) {
+        let { title, description } = req.body;
+        let id = req.params.entry_id;
+
+        let result = Joi.validate({ id, title, description }, validate.entries);
+        if (result.error) {
+            return response.Validation(res, statusCode.BadRequest, result);
+        };
+        return _next()
+    },
+    ValidateDeleteEntry(req, res, _next) {
+        let id = req.params.entry_id;
+
+        let result = Joi.validate({ id }, validate.entryId);
+        if (result.error) {
+            return response.Validation(res, statusCode.BadRequest, result);
+        }
+        return _next()
+    },
 };
+
+export default validate
