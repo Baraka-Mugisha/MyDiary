@@ -5,7 +5,7 @@ import createTables from './queries';
 dotenv.config();
 let connectionString;
 if (process.env.NODE_ENV === 'testing') {
-  connectionString = process.env.TESTDATABASE_URL;
+  connectionString = process.env.TEST_DATABASE_URL;
 } else {
   connectionString = process.env.DATABASE_URL;
 }
