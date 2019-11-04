@@ -9,10 +9,10 @@ chai.should();
 let loginToken;
 let wrongToken = 'hdsfhjsadyfurewnfdsfjkavc fahjkregdsdgqedf'
 // Signing up
-describe('User signup test: case 1', () => {
+describe('User signup test Version 1: case 1', () => {
   it('it should sign up a user', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_perfect)
       .end((_err, res) => {
         loginToken = res.body.data.token;
@@ -26,7 +26,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up an already existing user', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_perfect)
       .end((_err, res) => {
         res.body.should.have.property('status').eql(409);
@@ -39,7 +39,7 @@ describe('User signup test: case 1', () => {
 
   it('it should not create a user account with missing email', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withoutEmail)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -50,7 +50,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user when password is less than 8 characters', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_ShortPswd)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -61,7 +61,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user when the firstname is numbers', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_IntFirstName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -72,7 +72,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account when the lastName is numbers', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_IntLastName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -83,7 +83,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up an user account when the firstName contains a whitespace', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_WhitespaceFirstName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -94,7 +94,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account when the lastName contains a whitespace', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_WhitespaceLastName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -105,7 +105,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with no password', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withoutPswd)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -116,7 +116,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with no firstName', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUpfirstName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -127,7 +127,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with no lastName', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withoutlastName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -138,7 +138,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with empty lastName', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withVoidlastName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -149,7 +149,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with empty firstName', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withVoidfirstName)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -160,7 +160,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with empty email', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withVoidEmail)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -171,7 +171,7 @@ describe('User signup test: case 1', () => {
   });
   it('it should not sign up a user account with empty password', (done) => {
     chai.request(app)
-      .post('/auth/signup')
+      .post('/v1/auth/signup')
       .send(mockData.SignUp_withVoidPswd)
       .end((_err, res) => {
         res.should.have.status(400);
@@ -186,7 +186,7 @@ describe('User signup test: case 1', () => {
 describe('User Login test', () => {
   it('it should login a user', (done) => {
     chai.request(app)
-      .post('/auth/signin')
+      .post('/v1/auth/signin')
       .send(mockData.Login_perfect)
       .end((_err, res) => {
         res.should.have.status(200);
@@ -198,7 +198,7 @@ describe('User Login test', () => {
   });
   it('it should not login a user who does not have account', (done) => {
     chai.request(app)
-      .post('/auth/signin')
+      .post('/v1/auth/signin')
       .send(mockData.Login_wrongEmail)
       .end((err, res) => {
         res.should.have.status(404);
@@ -209,7 +209,7 @@ describe('User Login test', () => {
   });
   it('it should not login a user who does not have account', (done) => {
     chai.request(app)
-      .post('/auth/signin')
+      .post('/v1/auth/signin')
       .send(mockData.Login_wrongPassword)
       .end((err, res) => {
         res.should.have.status(401);

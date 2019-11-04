@@ -29,7 +29,7 @@ describe('Handle invalid routes', () => {
       .end((_err, res) => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('error').eql('Route/diadiaryry Not found.');
+        res.body.should.have.property('error').eql('Route /diadiaryry Not found.');
         done();
       });
   });
@@ -40,7 +40,7 @@ describe('Handle invalid routes', () => {
       .end((_err, res) => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('error').eql('Route/diadiaryry Not found.');
+        res.body.should.have.property('error').eql('Route /diadiaryry Not found.');
         done();
       });
   });
