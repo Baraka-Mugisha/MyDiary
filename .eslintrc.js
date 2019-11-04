@@ -16,18 +16,12 @@ module.exports = {
   },
   rules: {
     "class-methods-use-this": 0,
-    "no-tabs": 0,
-    "allowIndentationTabs": 0,
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
         "devDependencies": true
       }
-    ],
-    "indent": [
-      "error",
-      "tab"
     ],
     "comma-dangle": 0,
     "trailing-comma": 0,

@@ -4,6 +4,13 @@ node_js:
   - 10.16.2
 install:
   - npm install
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database mydiarydb;' -U postgres
 script:
   - npm test
+cache:
+  directories:
+    - node_modules
 after_success: npm run coverage
