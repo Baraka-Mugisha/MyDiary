@@ -1,10 +1,12 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../app';
+import app from '../../../app';
 import mockData from './mockData';
 
-chai.use(chaiHttp);
-chai.should();
+
+const entriesTestsv1 = () => {
+  chai.use(chaiHttp);
+  chai.should();
 
 let token;
 let tokenTwo;
@@ -524,3 +526,7 @@ describe('Modify a specific entry', () => {
       });
   });
 });
+}
+
+
+export default entriesTestsv1;
