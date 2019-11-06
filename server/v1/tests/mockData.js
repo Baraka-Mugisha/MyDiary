@@ -80,8 +80,6 @@ const mockData = {
     password: 'pass1234'
   },
 
-  // Sign In
-
   SignUp_perfect2: {
     firstName: 'pierre',
     lastName: 'Dominic',
@@ -102,7 +100,6 @@ const mockData = {
       email: 'Christophe@gmail.com',
       password: 'pass1234'
   },
-  //Entries MockData
 
   Entry_SignUp: {
     firstName: 'Baraka',

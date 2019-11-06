@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
 
-// The main route  tests
 const serverTestsv1 = () => {
   chai.use(chaiHttp);
   chai.should();
@@ -19,8 +18,6 @@ const serverTestsv1 = () => {
         });
     });
   });
-
-  // Inexistent routes tests
 
   describe('Handle invalid routes', () => {
     it('should display an error message', (done) => {

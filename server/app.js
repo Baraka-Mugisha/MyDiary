@@ -25,7 +25,7 @@ app.use('/v2/auth', authRoutes2);
 app.use('/v2/entries', entriesRoutes2);
 
 app.use((req, res, _next) => res.status(404).send({ status: 404, error: `Route ${req.url} Not found.` }));
-// 500 - Any server error
+
 app.use((err, req, res, next) => res.status(500).send({ status: 500, error: err }));
 
 app.listen(port, console.log('the app is listening on port', port));

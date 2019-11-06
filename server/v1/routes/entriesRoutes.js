@@ -11,4 +11,5 @@ router.get('/:entry_id', validate.ValidateSpecificEntry, entriesController.viewS
 
 router.patch('/:entry_id', validate.ValidateModifyEntry, entriesController.modifyEntry);
 router.delete('/:entry_id', validate.ValidateDeleteEntry, entriesController.deleteEntry);
+
 export default router;

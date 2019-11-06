@@ -4,10 +4,8 @@ const displayMessages = {
   userCreated: 'The User was created successfully',
   userNotFound: 'There is no such user with that email',
   pwdIncorrect: 'enter the correct password',
-  userFound: 'User found',
+  userFound: 'User Successfully logged in',
   signInFirst: 'You are not authorised for this operation. Sign in first.',
-
-  // entry messages
 
   emptyEntry: 'You have not yet created an entry',
   entryNotFound: 'the entry was not found',
@@ -16,5 +14,5 @@ const displayMessages = {
   editDenied: 'you can not edit another user\'s entry',
   deleteDenied: 'you can not delete another user\'s entries',
   entryDeleted: 'entry successfully deleted'
-}
-export default displayMessages
+};
+export default displayMessages;

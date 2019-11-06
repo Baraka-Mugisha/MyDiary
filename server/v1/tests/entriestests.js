@@ -16,10 +16,6 @@ const entriesTestsv1 = () => {
   let tokenFive;
   let tokenSix;
 
-  // About creating an entry
-  // ________________________
-  // ______________________
-
   describe('Creating an entry', () => {
     it('first sign up a user', (done) => {
       chai.request(app)
@@ -41,7 +37,7 @@ const entriesTestsv1 = () => {
     });
     it('User should create an entry', (done) => {
       chai.request(app)
-        .post('/v1/entries') // entry 1
+        .post('/v1/entries')
         .set('Authorization', `Bearer ${token}`)
         .send(mockData.Entry_1)
         .end((_err, res) => {
@@ -117,7 +113,6 @@ const entriesTestsv1 = () => {
     it('User should not create an entry with missing description', (done) => {
       chai.request(app)
         .post('/v1/entries')
-      //  entry 7
         .send(mockData.Entry_missingDescription)
         .set('Authorization', `Bearer ${token}`)
         .end((_err, res) => {
@@ -128,10 +123,6 @@ const entriesTestsv1 = () => {
         });
     });
   });
-
-  // About viewing entries
-  // ________________________
-  // ______________________
 
   describe('Viewing all user entries', () => {
     it('first sign up a user', (done) => {
@@ -154,7 +145,7 @@ const entriesTestsv1 = () => {
     });
     it('User should create an entry', (done) => {
       chai.request(app)
-        .post('/v1/entries') // entry 2
+        .post('/v1/entries')
         .set('Authorization', `Bearer ${tokenThree}`)
         .send(mockData.Entry_1)
         .end((_err, res) => {
@@ -171,7 +162,7 @@ const entriesTestsv1 = () => {
 
     it('User should create another entry', (done) => {
       chai.request(app)
-        .post('/v1/entries') // entry 3
+        .post('/v1/entries')
         .set('Authorization', `Bearer ${tokenThree}`)
         .send(mockData.Entry_1)
         .end((_err, res) => {
@@ -236,10 +227,6 @@ const entriesTestsv1 = () => {
     });
   });
 
-  // About a specific entry
-  // ________________________
-  // ______________________
-
   describe('Viewing a specific entry', () => {
     it('first sign up a user', (done) => {
       chai.request(app)
@@ -261,7 +248,7 @@ const entriesTestsv1 = () => {
     });
     it('User should create an entry', (done) => {
       chai.request(app)
-        .post('/v1/entries') // entry 4
+        .post('/v1/entries')
         .set('Authorization', `Bearer ${tokenFive}`)
         .send(mockData.Entry_1)
         .end((_err, res) => {
@@ -337,10 +324,6 @@ const entriesTestsv1 = () => {
     });
   });
 
-  // Modify entry
-  //= =================
-  //= =================
-
   describe('Modify a specific entry', () => {
     it('User should modify an entry', (done) => {
       chai.request(app)
@@ -405,7 +388,6 @@ const entriesTestsv1 = () => {
         });
     });
 
-    // check if the user input is valid
     it('User should not modify an entry with an empty title', (done) => {
       chai.request(app)
         .patch('/v1/entries/5')
@@ -454,10 +436,6 @@ const entriesTestsv1 = () => {
           done();
         });
     });
-
-    // Delete entry
-    //= =================
-    //= =================
 
     it('User should delete an entry', (done) => {
       chai.request(app)

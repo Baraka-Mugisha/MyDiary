@@ -10,6 +10,6 @@ router.get('/', entriesController.viewEntries);
 router.get('/:entry_id', validate.ValidateSpecificEntry, entriesController.viewSpecificEntry);
 
 router.patch('/:entry_id', validate.ValidateModifyEntry, entriesController.modifyEntry);
-// router.delete('/:entry_id', validate.ValidateDeleteEntry, entriesController.deleteEntry);
+router.delete('/:entry_id', validate.ValidateDeleteEntry, entriesController.deleteEntry);
 
 export default router;

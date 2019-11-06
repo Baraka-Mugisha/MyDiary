@@ -59,7 +59,8 @@ const entryController = {
         : ReturnIt.Error(res, 401, dispMessages.entryNotYours);
     }
     return ReturnIt.Message(res, 401, dispMessages.signInFirst);
-  }, async modifyEntry(req, res) {
+  },
+  async modifyEntry(req, res) {
     const id = req.params.entry_id;
     const { title, description } = req.body;
     let newEntry;
@@ -83,6 +84,28 @@ const entryController = {
         return ReturnIt.Success(res, 200, dispMessages.entryEdited, { id, title, description });
       }
       return ReturnIt.Error(res, 401, dispMessages.editDenied);
+    }
+    return ReturnIt.Error(res, 401, dispMessages.signInFirst);
+  },
+  async deleteEntry(req, res) {
+    const id = req.params.entry_id;
+    let entry;
+    let user;
+
+    try {
+      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
+      entry = await pool.query('SELECT * FROM entries WHERE id = $1;', [id]);
+    } catch (error) {
+      return ReturnIt.Error(res, 500, 'SERVER ERROR');
+    }
+    if (user.rows[0]) {
+      if (!entry.rows[0]) { return ReturnIt.Message(res, 404, dispMessages.entryNotFound); }
+
+      if (entry.rows[0].email === user.rows[0].email) {
+        await pool.query('DELETE FROM entries WHERE id = $1;', [id]);
+        return ReturnIt.Message(res, 200, dispMessages.entryDeleted);
+      }
+      return ReturnIt.Error(res, 401, dispMessages.deleteDenied);
     }
     return ReturnIt.Error(res, 401, dispMessages.signInFirst);
   },
