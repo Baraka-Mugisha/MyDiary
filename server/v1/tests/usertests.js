@@ -8,7 +8,6 @@ const userTestsv1 = () => {
   chai.should();
   let loginToken;
   const wrongToken = 'hdsfhjsadyfurewnfdsfjkavc fahjkregdsdgqedf';
-  // Signing up
   describe('User signup test Version 1: case 1', () => {
     it('it should sign up a user', (done) => {
       chai.request(app)
@@ -34,9 +33,6 @@ const userTestsv1 = () => {
         });
       done();
     });
-
-    // validations tests
-
     it('it should not create a user account with missing email', (done) => {
       chai.request(app)
         .post('/v1/auth/signup')
@@ -182,8 +178,7 @@ const userTestsv1 = () => {
     });
   });
 
-  // Logging in
-  describe('User Login test', () => {
+  describe('User Login test Version 1', () => {
     it('it should login a user', (done) => {
       chai.request(app)
         .post('/v1/auth/signin')

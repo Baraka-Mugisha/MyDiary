@@ -1,6 +1,7 @@
-const queries = {
+const create = {
   usersTable: `
-CREATE TABLE IF NOT EXISTS users (
+  DROP TABLE IF EXISTS users cascade;
+  CREATE TABLE IF NOT EXISTS users (
     id serial PRIMARY KEY UNIQUE,
     firstName TEXT NOT NULL,
     lastName TEXT NOT NULL,
@@ -8,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     password TEXT NOT NULL
   )`,
   entriesTable: `
+  DROP TABLE IF EXISTS entries cascade;
   CREATE TABLE IF NOT EXISTS entries(
     id serial PRIMARY KEY UNIQUE,
     email TEXT NOT NULL,
@@ -21,5 +23,4 @@ const deleteTables = `
     DROP TABLE IF EXISTS users cascade;
     DROP TABLE IF EXISTS entries cascade;
     `;
-export default `${queries.usersTable}; ${queries.entriesTable}`;
-export { deleteTables };
+export default { create, deleteTables };

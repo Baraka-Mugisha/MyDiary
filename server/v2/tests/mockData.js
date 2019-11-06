@@ -79,9 +79,6 @@ const mockData = {
     email: 'Christophe@gmail.com',
     password: 'pass1234'
   },
-
-  // Sign In
-
   SignUp_perfect2: {
     firstName: 'pierre',
     lastName: 'Dominic',
@@ -89,21 +86,20 @@ const mockData = {
     password: 'pass12345'
   },
   Login_wrongToken: {
-    token: "hasuwyuebfncx nzcskdfweiyfertrjgkdsoowueresdgshdfjhswieri"
+    token: 'hasuwyuebfncx nzcskdfweiyfertrjgkdsoowueresdgshdfjhswieri'
   },
   Login_wrongEmail: {
     email: 'memory@gmail.com',
     password: 'dash1234'
-  }, Login_wrongPassword: {
-    email: 'baraka@gmail.com',
+  },
+  Login_wrongPassword: {
+    email: 'Christophe@gmail.com',
     password: 'dash1234'
   },
   Login_perfect: {
-      email: 'Christophe@gmail.com',
-      password: 'pass1234'
+    email: 'Christophe@gmail.com',
+    password: 'pass1234'
   },
-  //Entries MockData
-
   Entry_SignUp: {
     firstName: 'Baraka',
     lastName: 'Uwimana',
