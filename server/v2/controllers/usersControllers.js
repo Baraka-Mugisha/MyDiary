@@ -26,4 +26,17 @@ export const userController = {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
   },
+  async signIn(req, res) {
+    const { email, password } = req.body;
+    let user;
+    try {
+      user = await pool.query('SELECT * FROM users WHERE email = $1;', [email]);
+    } catch (error) { return res.status(500).json({ status: 500, error: 'SERVER ERROR' }); }
+
+    if (!user.rows[0]) { return ReturnIt.Error(res, 404, dispMessages.userNotFound); }
+
+    if (!bcryptPwd.checkThepassword(password, user.rows[0].password)) { return ReturnIt.Error(res, 401, dispMessages.pwdIncorrect); }
+
+    return ReturnIt.Success(res, 200, dispMessages.userFound, { token: tokens.getToken(user.rows[0]) });
+  }
 };
