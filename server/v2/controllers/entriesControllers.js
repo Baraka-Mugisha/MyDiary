@@ -39,7 +39,8 @@ const entryController = {
       return entry.length !== 0 ? ReturnIt.Success(res, 200, dispMessages.success, entry) : ReturnIt.Error(res, 404, dispMessages.emptyEntry);
     }
     return ReturnIt.Message(res, 401, dispMessages.signInFirst);
-  }, async viewSpecificEntry(req, res) {
+  },
+  async viewSpecificEntry(req, res) {
     let entry;
     let user;
     const id = req.params.entry_id;
@@ -58,6 +59,32 @@ const entryController = {
         : ReturnIt.Error(res, 401, dispMessages.entryNotYours);
     }
     return ReturnIt.Message(res, 401, dispMessages.signInFirst);
+  }, async modifyEntry(req, res) {
+    const id = req.params.entry_id;
+    const { title, description } = req.body;
+    let newEntry;
+    let user;
+    let entry;
+    try {
+      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
+      entry = await pool.query('SELECT * FROM entries WHERE id = $1;', [id]);
+    } catch (error) {
+      return ReturnIt.Error(res, 500, 'SERVER ERROR');
+    }
+    if (user.rows[0]) {
+      if (!entry.rows[0]) { return ReturnIt.Error(res, 404, dispMessages.entryNotFound); }
+
+      if (entry.rows[0].email === user.rows[0].email) {
+        try {
+          newEntry = await pool.query('UPDATE entries SET title = $1, description = $2 WHERE id = $3 RETURNING *;', [title, description, id]);
+        } catch (error) {
+          return ReturnIt.Error(res, 500, 'SERVER ERROR');
+        }
+        return ReturnIt.Success(res, 200, dispMessages.entryEdited, { id, title, description });
+      }
+      return ReturnIt.Error(res, 401, dispMessages.editDenied);
+    }
+    return ReturnIt.Error(res, 401, dispMessages.signInFirst);
   },
 };
 
