@@ -24,6 +24,22 @@ const entryController = {
     }
     return ReturnIt.Message(res, 401, dispMessages.signInFirst);
   },
+  async viewEntries(req, res) {
+    let user;
+    let entryFound;
+    try {
+      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
+      entryFound = await pool.query('SELECT * FROM entries WHERE email = $1;', [tokens.decoded(req, res).email]);
+    } catch (error) {
+      return ReturnIt.Error(res, 500, 'SERVER ERROR');
+    }
+    const entry = entryFound.rows.sort((a, b) => b.id - a.id);
+
+    if (user.rows[0]) {
+      return entry.length !== 0 ? ReturnIt.Success(res, 200, dispMessages.success, entry) : ReturnIt.Error(res, 404, dispMessages.emptyEntry);
+    }
+    return ReturnIt.Message(res, 401, dispMessages.signInFirst);
+  },
 };
 
 export default entryController;
