@@ -127,7 +127,7 @@ describe('Creating an entry version 2', () => {
   });
 });
 
-describe('Viewing all user entries', () => {
+describe('Viewing all user entries version 2', () => {
   it('first sign up a user', (done) => {
     chai.request(app)
       .post('/v2/auth/signup')
@@ -225,6 +225,103 @@ describe('Viewing all user entries', () => {
         res.should.have.status(404);
         res.body.should.have.property('status').eql(404);
         res.body.should.have.property('error').eql('You have not yet created an entry');
+        done();
+      });
+  });
+});
+
+describe('Viewing a specific entry version 2', () => {
+  it('first sign up a user', (done) => {
+    chai.request(app)
+      .post('/v2/auth/signup')
+      .send(mockData.Entry_SignUp5)
+      .end((_err, res) => {
+        tokenFive = res.body.data.token;
+        done();
+      });
+  });
+  it('first sign up another user', (done) => {
+    chai.request(app)
+      .post('/v2/auth/signup')
+      .send(mockData.Entry_SignUp6)
+      .end((_err, res) => {
+        tokenSix = res.body.data.token;
+        done();
+      });
+  });
+  it('User should create an entry', (done) => {
+    chai.request(app)
+      .post('/v2/entries')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .send(mockData.Entry_1)
+      .end((_err, res) => {
+        res.should.have.status(201);
+        res.body.should.have.property('status').eql(201);
+        res.body.should.have.property('message').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('id');
+        res.body.data.should.have.property('title').eql('This is my title');
+        res.body.data.should.have.property('description').eql('This is my description of of my diary entry');
+        done();
+      });
+  });
+  it('User should view a specific entry', (done) => {
+    chai.request(app)
+      .get('/v2/entries/4')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(200);
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('message').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.property('id');
+        res.body.data.should.have.property('created_on');
+        res.body.data.should.have.property('email');
+        res.body.data.should.have.property('title');
+        res.body.data.should.have.property('description');
+        done();
+      });
+  });
+  it('User should not view a specific entry if not signed up', (done) => {
+    chai.request(app)
+      .get('/v2/entries/4')
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('message').eql('You are not authorised for this operation. Sign in first.');
+        done();
+      });
+  });
+  it('User should not view a specific entry with an invalid token', (done) => {
+    chai.request(app)
+      .get('/v2/entries/4')
+      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLTMwMGViODQwIiwiZW1haWwiOiJrYWxpc2FAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiQ2hyaXN0aWFuIiwibGFzdE5hbWUiOiJLYWxpc2EiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTY5MzI4MjY5fQ.Rzbk2yB0hM-vUV5OokmiIHT7IrTIPDuFXE3VYekDeo0')
+      .end((_err, res) => {
+        res.should.have.status(401);
+        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('message').eql('You are not authorised for this operation. Sign in first.');
+        done();
+      });
+  });
+  it('User should not view a specific entry that he had not made', (done) => {
+    chai.request(app)
+      .get('/v2/entries/300')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(404);
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('message').eql('the entry was not found');
+        done();
+      });
+  });
+  it('User should not view entry with an invalid Id', (done) => {
+    chai.request(app)
+      .get('/v2/entries/-10ab')
+      .set('Authorization', `Bearer ${tokenFive}`)
+      .end((_err, res) => {
+        res.should.have.status(400);
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('id is not valid');
         done();
       });
   });

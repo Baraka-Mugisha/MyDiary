@@ -39,6 +39,25 @@ const entryController = {
       return entry.length !== 0 ? ReturnIt.Success(res, 200, dispMessages.success, entry) : ReturnIt.Error(res, 404, dispMessages.emptyEntry);
     }
     return ReturnIt.Message(res, 401, dispMessages.signInFirst);
+  }, async viewSpecificEntry(req, res) {
+    let entry;
+    let user;
+    const id = req.params.entry_id;
+    try {
+      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
+      entry = await pool.query('SELECT * FROM entries WHERE id = $1;', [id]);
+    } catch (error) {
+      return ReturnIt.Error(res, 500, 'SERVER ERROR');
+    }
+    if (user.rows[0]) {
+      if (!entry.rows[0]) {
+        return ReturnIt.Message(res, 404, dispMessages.entryNotFound);
+      }
+      const entryFound = user.rows[0].email === entry.rows[0].email;
+      return entryFound ? ReturnIt.Success(res, 200, dispMessages.success, entry.rows[0])
+        : ReturnIt.Error(res, 401, dispMessages.entryNotYours);
+    }
+    return ReturnIt.Message(res, 401, dispMessages.signInFirst);
   },
 };
 

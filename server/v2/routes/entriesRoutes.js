@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/', validate.ValidateCreateEntry, entriesController.createEntry);
 
 router.get('/', entriesController.viewEntries);
-// router.get('/:entry_id', validate.ValidateSpecificEntry, entriesController.viewSpecificEntry);
+router.get('/:entry_id', validate.ValidateSpecificEntry, entriesController.viewSpecificEntry);
 
 // router.patch('/:entry_id', validate.ValidateModifyEntry, entriesController.modifyEntry);
 // router.delete('/:entry_id', validate.ValidateDeleteEntry, entriesController.deleteEntry);
