@@ -67,18 +67,6 @@ const mockData = {
     email: 'Christophe@gmail.com',
     password: 'pass1234'
   },
-  SignUp_WhitespaceFirstName: {
-    firstName: 'Emmanuel Dede',
-    lastName: '1234',
-    email: 'Christophe@gmail.com',
-    password: 'pass1234'
-  },
-  SignUp_WhitespaceLastName: {
-    firstName: 'Emmanuel',
-    lastName: 'Christophe Dede',
-    email: 'Christophe@gmail.com',
-    password: 'pass1234'
-  },
   SignUp_perfect2: {
     firstName: 'pierre',
     lastName: 'Dominic',

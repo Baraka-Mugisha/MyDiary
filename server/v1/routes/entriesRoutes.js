@@ -1,10 +1,10 @@
 import express from 'express';
 import entriesController from '../controllers/entriesControllers';
-import validate from '../middlewares/validation';
+import validate from '../../middlewares/validation';
 
 const router = express.Router();
 
-router.post('/', validate.ValidateCreateEntry,entriesController.createEntry);
+router.post('/', validate.ValidateCreateEntry, entriesController.createEntry);
 
 router.get('/', entriesController.viewEntries);
 router.get('/:entry_id', validate.ValidateSpecificEntry, entriesController.viewSpecificEntry);

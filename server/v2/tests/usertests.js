@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
-import mockData from './mockData';
+import mockData from '../../mockData';
 import userTestsv1 from '../../v1/tests/usertests';
 
 chai.use(chaiHttp);
@@ -72,28 +72,6 @@ describe('User signup test Version 2', () => {
     chai.request(app)
       .post('/v2/auth/signup')
       .send(mockData.SignUp_IntLastName)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('lastName is not valid');
-        done();
-      });
-  });
-  it('it should not sign up an user account when the firstName contains a whitespace', (done) => {
-    chai.request(app)
-      .post('/v2/auth/signup')
-      .send(mockData.SignUp_WhitespaceFirstName)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('firstName is not valid');
-        done();
-      });
-  });
-  it('it should not sign up a user account when the lastName contains a whitespace', (done) => {
-    chai.request(app)
-      .post('/v2/auth/signup')
-      .send(mockData.SignUp_WhitespaceLastName)
       .end((_err, res) => {
         res.should.have.status(400);
         res.body.should.have.property('status').eql(400);

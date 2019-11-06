@@ -1,8 +1,8 @@
-import tokens from '../helpers/tokens';
-import bcryptPwd from '../helpers/bcryptPwd';
-import dispMessages from '../helpers/displayMessages';
-import status from '../helpers/statusMessages';
-import ReturnIt from '../helpers/returnIt';
+import tokens from '../../helpers/tokens';
+import bcryptPwd from '../../helpers/bcryptPwd';
+import dispMessages from '../../helpers/displayMessages';
+import status from '../../helpers/statusMessages';
+import ReturnIt from '../../helpers/returnIt';
 import pool from '../database/dbConnect';
 
 export const userController = {

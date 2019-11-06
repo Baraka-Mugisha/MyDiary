@@ -1,6 +1,6 @@
-import tokens from '../helpers/tokens';
-import ReturnIt from '../helpers/returnIt';
-import dispMessages from '../helpers/displayMessages';
+import tokens from '../../helpers/tokens';
+import ReturnIt from '../../helpers/returnIt';
+import dispMessages from '../../helpers/displayMessages';
 import pool from '../database/dbConnect';
 
 const entryController = {

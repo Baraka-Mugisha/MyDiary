@@ -1,5 +1,5 @@
-import bcryptPwd from '../helpers/bcryptPwd';
-import tokens from '../helpers/tokens';
+import bcryptPwd from '../../helpers/bcryptPwd';
+import tokens from '../../helpers/tokens';
 
 const users = [];
 
