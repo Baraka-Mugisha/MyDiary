@@ -19,8 +19,18 @@ const create = {
   )`
 };
 
-const deleteTables = ` 
+const table = {
+  insertUsers: 'INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4) RETURNING *;',
+  selectUsers: 'SELECT * FROM users WHERE email = $1;',
+  insertEntries: 'INSERT INTO entries (email, title, description) VALUES($1, $2, $3) RETURNING *;',
+  selectEntriesEmail: 'SELECT * FROM entries WHERE email = $1;',
+  selectEntriesId: 'SELECT * FROM entries WHERE id = $1;',
+  updateEntries: 'UPDATE entries SET title = $1, description = $2 WHERE id = $3 RETURNING *;',
+  deleteEntries: 'DELETE FROM entries WHERE id = $1;',
+  deleteTables: ` 
     DROP TABLE IF EXISTS users cascade;
     DROP TABLE IF EXISTS entries cascade;
-    `;
-export default { create, deleteTables };
+    `,
+};
+
+export default { create, table };

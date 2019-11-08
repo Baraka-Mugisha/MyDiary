@@ -2,6 +2,7 @@ import tokens from '../../helpers/tokens';
 import ReturnIt from '../../helpers/returnIt';
 import dispMessages from '../../helpers/displayMessages';
 import pool from '../database/dbConnect';
+import queries from '../database/queries';
 
 const entryController = {
   async createEntry(req, res) {
@@ -9,13 +10,13 @@ const entryController = {
     const { title, description } = req.body;
     let user;
     try {
-      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
+      user = await pool.query(queries.table.selectUsers, [tokens.decoded(req, res).email]);
     } catch (error) {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
 
     if (user.rows[0]) {
-      try { newEntry = await pool.query('INSERT INTO entries (email, title, description) VALUES($1, $2, $3) RETURNING *;', [user.rows[0].email, title, description]); } catch (error) {
+      try { newEntry = await pool.query(queries.table.insertEntries, [user.rows[0].email, title, description]); } catch (error) {
         return ReturnIt.Error(res, 500, 'SERVER ERROR');
       }
       const entryDisp = { ...newEntry.rows[0] };
@@ -28,8 +29,8 @@ const entryController = {
     let user;
     let entryFound;
     try {
-      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
-      entryFound = await pool.query('SELECT * FROM entries WHERE email = $1;', [tokens.decoded(req, res).email]);
+      user = await pool.query(queries.table.selectUsers, [tokens.decoded(req, res).email]);
+      entryFound = await pool.query(queries.table.selectEntriesEmail, [tokens.decoded(req, res).email]);
     } catch (error) {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
@@ -45,8 +46,8 @@ const entryController = {
     let user;
     const id = req.params.entry_id;
     try {
-      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
-      entry = await pool.query('SELECT * FROM entries WHERE id = $1;', [id]);
+      user = await pool.query(queries.table.selectUsers, [tokens.decoded(req, res).email]);
+      entry = await pool.query(queries.table.selectEntriesId, [id]);
     } catch (error) {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
@@ -67,8 +68,8 @@ const entryController = {
     let user;
     let entry;
     try {
-      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
-      entry = await pool.query('SELECT * FROM entries WHERE id = $1;', [id]);
+      user = await pool.query(queries.table.selectUsers, [tokens.decoded(req, res).email]);
+      entry = await pool.query(queries.table.selectEntriesId, [id]);
     } catch (error) {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
@@ -77,7 +78,7 @@ const entryController = {
 
       if (entry.rows[0].email === user.rows[0].email) {
         try {
-          newEntry = await pool.query('UPDATE entries SET title = $1, description = $2 WHERE id = $3 RETURNING *;', [title, description, id]);
+          newEntry = await pool.query(queries.table.updateEntries, [title, description, id]);
         } catch (error) {
           return ReturnIt.Error(res, 500, 'SERVER ERROR');
         }
@@ -93,8 +94,8 @@ const entryController = {
     let user;
 
     try {
-      user = await pool.query('SELECT * FROM users WHERE email = $1;', [tokens.decoded(req, res).email]);
-      entry = await pool.query('SELECT * FROM entries WHERE id = $1;', [id]);
+      user = await pool.query(queries.table.selectUsers, [tokens.decoded(req, res).email]);
+      entry = await pool.query(queries.table.selectEntriesId, [id]);
     } catch (error) {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
@@ -102,7 +103,7 @@ const entryController = {
       if (!entry.rows[0]) { return ReturnIt.Message(res, 404, dispMessages.entryNotFound); }
 
       if (entry.rows[0].email === user.rows[0].email) {
-        await pool.query('DELETE FROM entries WHERE id = $1;', [id]);
+        await pool.query(queries.table.deleteEntries, [id]);
         return ReturnIt.Message(res, 200, dispMessages.entryDeleted);
       }
       return ReturnIt.Error(res, 401, dispMessages.deleteDenied);

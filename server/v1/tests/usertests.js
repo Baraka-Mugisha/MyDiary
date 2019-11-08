@@ -180,7 +180,7 @@ const userTestsv1 = () => {
           done();
         });
     });
-    it('it should not login a user who does not have account', (done) => {
+    it('it should not login a user whosenpassword is wrong', (done) => {
       chai.request(app)
         .post('/v1/auth/signin')
         .send(mockData.Login_wrongPassword)
