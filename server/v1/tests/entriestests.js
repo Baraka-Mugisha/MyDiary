@@ -491,18 +491,6 @@ const entriesTestsv1 = () => {
           done();
         });
     });
-
-    it('User should not delete entry with an invalid Id', (done) => {
-      chai.request(app)
-        .delete('/v1/entries/-10ab')
-        .set('Authorization', `Bearer ${tokenFive}`)
-        .end((_err, res) => {
-          res.should.have.status(400);
-          res.body.should.have.property('status').eql(400);
-          res.body.should.have.property('error').eql('id is not valid');
-          done();
-        });
-    });
   });
 };
 
