@@ -65,66 +65,6 @@ describe('Creating an entry version 2', () => {
         done();
       });
   });
-  it('User should not create an entry with an invalid token', (done) => {
-    chai.request(app)
-      .post('/v2/entries')
-      .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLTMwMGViODQwIiwiZW1haWwiOiJrYWxpc2FAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiQ2hyaXN0aWFuIiwibGFzdE5hbWUiOiJLYWxpc2EiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTY5MzI4MjY5fQ.Rzbk2yB0hM-vUV5OokmiIHT7IrTIPDuFXE3VYekDeo0')
-      .send(mockData.Entry_2)
-      .end((_err, res) => {
-        res.should.have.status(401);
-        res.body.should.have.property('status').eql(401);
-        res.body.should.have.property('message').eql('You are not authorised for this operation. Sign in first.');
-        done();
-      });
-  });
-  it('User should not create an entry with an empty title', (done) => {
-    chai.request(app)
-      .post('/v2/entries')
-      .set('Authorization', `Bearer ${token}`)
-      .send(mockData.Entry_titleEmpty)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('title is not allowed to be empty');
-        done();
-      });
-  });
-  it('User should not create an entry with missing title', (done) => {
-    chai.request(app)
-      .post('/v2/entries')
-      .send(mockData.Entry_missingTitle)
-      .set('Authorization', `Bearer ${token}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('title is required');
-        done();
-      });
-  });
-  it('User should not create an entry with empty description', (done) => {
-    chai.request(app)
-      .post('/v2/entries')
-      .send(mockData.Entry_descriptionEmpty)
-      .set('Authorization', `Bearer ${token}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('description is not allowed to be empty');
-        done();
-      });
-  });
-  it('User should not create an entry with missing description', (done) => {
-    chai.request(app)
-      .post('/v2/entries')
-      .send(mockData.Entry_missingDescription)
-      .set('Authorization', `Bearer ${token}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('description is required');
-        done();
-      });
-  });
 });
 
 describe('Viewing all user entries version 2', () => {
@@ -314,17 +254,6 @@ describe('Viewing a specific entry version 2', () => {
         done();
       });
   });
-  it('User should not view entry with an invalid Id', (done) => {
-    chai.request(app)
-      .get('/v2/entries/-10ab')
-      .set('Authorization', `Bearer ${tokenFive}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('id is not valid');
-        done();
-      });
-  });
 });
 
 describe('Modify a specific entry version 2', () => {
@@ -390,61 +319,12 @@ describe('Modify a specific entry version 2', () => {
         done();
       });
   });
-  it('User should not modify an entry with an empty title', (done) => {
-    chai.request(app)
-      .patch('/v2/entries/3')
-      .set('Authorization', `Bearer ${tokenFive}`)
-      .send(mockData.Entry_titleEmpty)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('title is not allowed to be empty');
-        done();
-      });
-  });
-  it('User should not modify an entry with missing title', (done) => {
-    chai.request(app)
-      .patch('/v2/entries/3')
-      .send(mockData.Entry_missingTitle)
-      .set('Authorization', `Bearer ${tokenFive}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('title is required');
-        done();
-      });
-  });
-  it('User should not modify an entry with empty description', (done) => {
-    chai.request(app)
-      .patch('/v2/entries/3')
-      .send(mockData.Entry_descriptionEmpty)
-      .set('Authorization', `Bearer ${tokenFive}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('description is not allowed to be empty');
-        done();
-      });
-  });
-  it('User should not modify an entry with missing description', (done) => {
-    chai.request(app)
-      .patch('/v2/entries/3')
-      .send(mockData.Entry_missingDescription)
-      .set('Authorization', `Bearer ${tokenFive}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('description is required');
-        done();
-      });
-  });
 
   it('User should delete an entry', (done) => {
     chai.request(app)
       .delete('/v2/entries/4')
       .set('Authorization', `Bearer ${tokenFive}`)
       .end((_err, res) => {
-        console.log(_err);
         res.should.have.status(200);
         res.body.should.have.property('status').eql(200);
         res.body.should.have.property('message').eql('entry successfully deleted');
@@ -491,17 +371,6 @@ describe('Modify a specific entry version 2', () => {
         res.should.have.status(401);
         res.body.should.have.property('status').eql(401);
         res.body.should.have.property('error').eql('you can not delete another user\'s entries');
-        done();
-      });
-  });
-  it('User should not delete entry with an invalid Id', (done) => {
-    chai.request(app)
-      .delete('/v2/entries/-10ab')
-      .set('Authorization', `Bearer ${tokenFive}`)
-      .end((_err, res) => {
-        res.should.have.status(400);
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('id is not valid');
         done();
       });
   });

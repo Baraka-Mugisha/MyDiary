@@ -8,9 +8,11 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 Here is the link to the website heroku app [https://my-diary-adc.herokuapp.com/](https://my-diary-adc.herokuapp.com/).
 
+Here is the link to [Documentation](https://web.postman.co/collections/8227679-87adf8f6-49c8-4eb4-8eff-709fcc62d1c5?version=latest&workspace=cff96335-7e5d-4932-839f-42090c1c829b)
+
 MyDiary is an online journal where users can pen down their thoughts and feelings. It provieds the user with functional features regarding Diary entries.
 
-`## What does it do?`
+## What does it do?
 - Users can **sign up**
 - Users can **sign in**
 - Users can **view all entries** showing the most recently created first
