@@ -7,8 +7,8 @@ import queries from '../database/queries';
 const entryController = {
   async createEntry(req, res) {
     let newEntry;
-    const { title, description } = req.body;
-    let user;
+const { title, description } = req.body;
+let user;
     try {
       user = await pool.query(queries.table.selectUsers, [tokens.decoded(req, res).email]);
     } catch (error) {
@@ -73,6 +73,14 @@ const entryController = {
     } catch (error) {
       return ReturnIt.Error(res, 500, 'SERVER ERROR');
     }
+
+
+
+
+console.log('My Diary Console');
+
+var MyDiary;
+
     if (user.rows[0]) {
       if (!entry.rows[0]) { return ReturnIt.Error(res, 404, dispMessages.entryNotFound); }
 
