@@ -4,6 +4,7 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 [![Build Status](https://travis-ci.org/mugishaje/MyDiary.svg?branch=develop)](https://travis-ci.org/mugishaje/MyDiary)
 [![Coverage Status](https://coveralls.io/repos/github/mugishaje/MyDiary/badge.svg?branch=develop)](https://coveralls.io/github/mugishaje/MyDiary?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c0b7f8951e06a34104e1/maintainability)](https://codeclimate.com/github/mugishaje/MyDiary/maintainability)
+[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
 
 Here is the link to the website heroku app [https://my-diary-adc.herokuapp.com/](https://my-diary-adc.herokuapp.com/).
