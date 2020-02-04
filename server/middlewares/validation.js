@@ -83,7 +83,7 @@ firstName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
     if (result.error) {
       return response.Validation(res, statusCode.BadRequest, result);
     }
-    return _next();
+    return _next()
   },
 };
 
