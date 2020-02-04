@@ -33,11 +33,11 @@ firstName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
     } = req.body;
     const result = Joi.validate({
       email, firstName, lastName, password
-    }, validate.user_sign_up);
+    }, validate.user_sign_up)
     if (result.error) {
       return response.Validation(res, statusCode.BadRequest, result);
     }
-    return _next();
+    return _next()
   },
   ValidateSignIn(req, res, _next) {
     const { email, password } = req.body;
@@ -87,4 +87,4 @@ firstName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
   },
 };
 
-export default validate;
+export default validate
