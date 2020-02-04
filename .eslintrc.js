@@ -24,6 +24,7 @@ module.exports = {
         "devDependencies": true
       }
     ],
+    
     "comma-dangle": 0,
     "trailing-comma": 0,
     "quote-props": 0,
