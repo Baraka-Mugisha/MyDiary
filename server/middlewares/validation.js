@@ -1,12 +1,11 @@
 import Joi from 'joi';
 import response from './ValidationReturn';
 import statusCode from '../helpers/statusMessages';
-
 const validate = {
-  user_sign_up: Joi.object().keys({
-    firstName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
+user_sign_up: Joi.object().keys({
+firstName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
       .required(),
-    lastName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
+               lastName: Joi.string().regex(/^\w+(\.\w+|\s\w)*[^\s\.][^\d]+/).min(1).max(30)
       .required(),
     email: Joi.string().email({ minDomainAtoms: 2 }).required(),
     password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/).required(),
@@ -34,11 +33,11 @@ const validate = {
     } = req.body;
     const result = Joi.validate({
       email, firstName, lastName, password
-    }, validate.user_sign_up);
+    }, validate.user_sign_up)
     if (result.error) {
       return response.Validation(res, statusCode.BadRequest, result);
     }
-    return _next();
+    return _next()
   },
   ValidateSignIn(req, res, _next) {
     const { email, password } = req.body;
@@ -84,8 +83,8 @@ const validate = {
     if (result.error) {
       return response.Validation(res, statusCode.BadRequest, result);
     }
-    return _next();
+    return _next()
   },
 };
 
-export default validate;
+export default validate
